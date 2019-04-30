@@ -5,13 +5,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>alejof-blog-vue</title>
+    <title>Alejo F - Notes app</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <title>AlejoF.dev - {{page.title}}</title>
+    
+    <!-- Bootstrap core CSS -->
+    <link href="https://alejof.dev/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom styles for this template -->
+    <link href="https://alejof.dev/assets/css/the-big-picture.css" rel="stylesheet">
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but alejof-blog-vue doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong>We're sorry but this app doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+        
+    <!-- Page Content -->
+    <div class="container container-main">
+      <div class="row">
+        <div class="col-lg-3">
+          <p>
+            <img src="https://blob.alejof.dev/assets/code-icon.png">
+          </p>
+          <h1>My notes</h1>
+          <p>Let's write things, or get back to the <a href="https://alejof.dev">main site</a></p>
+        </div>
+        <div class="col-lg-9">
+          <div id="app"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://alejof.dev/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="https://alejof.dev/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
     <!-- built files will be auto injected -->
   </body>
 </html>
