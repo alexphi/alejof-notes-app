@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import auth from "./auth/authService";
 
-import Callback from './components/Callback.vue'
+import Callback from './components/auth/Callback.vue'
 
 import Home from "./views/Home.vue";
 

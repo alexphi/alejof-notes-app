@@ -82,6 +82,10 @@ export default {
     margin-top: 50px;
 }
 
+.right-h2-btn {
+    margin-top: 5px;
+}
+
 @media (min-width: 768px) {
     #app {
         margin-top: 30px;
