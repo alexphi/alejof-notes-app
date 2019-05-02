@@ -1,0 +1,22 @@
+/* revert main-site's styles */
+
+body {
+  background-color: #fff;
+
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+
+  color: #233142;
+}
+
+a, a:hover {
+    color: #6c757d;
+}
+
+@media (min-width: 768px) {
+    body {
+        background-image: none;
+    }
+}

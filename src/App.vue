@@ -1,56 +1,90 @@
 <template>
-  <div id="app">
-    <router-view/>
-    
-    <hr style="border-color: #facf5a" />
-    
-    <div v-if="isAuthenticated">
-      <a class="btn btn-danger" href="#" @click.prevent="logout">Log out</a>
+    <div id="app">
+        <div v-if="!isLoggedIn" class="log-in">
+            <p>
+                Please log in to continue to app
+            </p>
+            <a class="btn btn-sm btn-outline-secondary"
+               href="#"
+               @click.prevent="login">Login</a>
+        </div>
+
+        <router-view />
+
+        <div v-if="isLoggedIn" class="log-out text-right small">
+            <hr />
+            Logged in as {{ nickname }}
+            &nbsp;&bull;&nbsp;
+            <a href="#"
+               @click.prevent="logout">Log out</a>
+        </div>
     </div>
-    <div v-else>
-      <a class="btn btn-info" href="#" @click.prevent="login">Login</a>
-    </div>
-  </div>
 </template>
 
 <script>
+import Vuex from 'vuex'
+import Constants from '@/constants'
+
 export default {
-  name: "app",
-  data() {
-    return {
-      isAuthenticated: false
-    };
-  },
-  
-  async created() {
-    try {
-      await this.$auth.renewTokens();
-    } catch (e) {
-      console.log(e);
-    }
-  },
-  
-  methods: {
-    login() {
-      this.$auth.login();
+    name: "app",
+    data() {
+        return {
+            profile: {}
+        };
     },
-    logout() {
-      this.$auth.logOut();
+    computed: {
+        nickname() {
+           return this.profile ? this.profile.nickname : 'unknown'
+        },
+        ...Vuex.mapState([
+            'isLoggedIn'
+        ])
     },
-    handleLoginEvent(data) {
-      this.isAuthenticated = data.loggedIn;
-      this.profile = data.profile;
+
+    async created() {
+        try {
+            await this.$auth.renewTokens();
+        } catch (e) {
+            console.log(e);
+        }
+    },
+
+    methods: {
+        login() {
+            this.$auth.login();
+        },
+        logout() {
+            this.$auth.logOut();
+        },
+        handleLoginEvent(data) {
+            this.$store.commit(Constants.Mutations.SET_LOGGED_IN, data.loggedIn)
+            this.profile = data.profile
+        }
     }
-  }
 };
 </script>
 
-
 <style>
 #app {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  margin-top: 60px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    margin-top: 30px;
+}
+
+.log-in {
+    text-align: center;
+    margin-top: -10px;
+}
+
+.log-out {
+    text-align: center;
+    margin-top: 50px;
+}
+
+@media (min-width: 768px) {
+    #app {
+        margin-top: 30px;
+    }
 }
 </style>

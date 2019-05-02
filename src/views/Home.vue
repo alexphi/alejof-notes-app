@@ -1,12 +1,18 @@
 <template>
-  <div class="home">
-    <h1>Welcome!</h1>
-  </div>
+    <div>
+        <template v-if="isLoggedIn">
+            <h1>Welcome!</h1>
+        </template>
+    </div>
 </template>
 
 <script>
+import Vuex from "vuex";
 
 export default {
-  name: 'home',
-}
+    name: "home",
+    computed: {
+        ...Vuex.mapState(["isLoggedIn"])
+    }
+};
 </script>
