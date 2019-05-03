@@ -8,7 +8,7 @@
 
         <hr />
         <p>
-            <a href="/">Go back</a>.
+            <router-link to="/" class="command-link"><i class="fas fa-angle-left"></i>&nbsp;Go back</router-link>.
         </p>
     </div>
 </template>

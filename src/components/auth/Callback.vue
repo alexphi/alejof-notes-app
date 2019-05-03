@@ -13,7 +13,7 @@ export default {
     },
 
     methods: {
-        handleLoginEvent(data) {
+        handleLogin(data) {
             this.$router.push(data.state.target || "/");
         }
     }

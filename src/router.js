@@ -22,12 +22,12 @@ const routes = [
     {
         path: '/new',
         name: 'new',
-        component: () => import(/* webpackChunkName: "new-entry"  */ './views/New.vue')
+        component: () => import(/* webpackChunkName: "entry-new"  */ './views/New.vue')
     },
     {
         path: '/list',
         name: 'list',
-        component: () => import(/* webpackChunkName: "list-entry"  */ './views/List.vue')
+        component: () => import(/* webpackChunkName: "entry-list"  */ './views/List.vue')
     },
 ];
 
@@ -38,7 +38,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
     const isAuthenticated = auth.isAuthenticated()
-    console.log(`> Navigating to ${to}. Authenticated = ${isAuthenticated}`)
+    console.log(`> Navigating to ${to.path}. Authenticated = ${isAuthenticated}`)
 
     if (to.path === "/" || to.path === "/callback" || isAuthenticated) {
         return next();

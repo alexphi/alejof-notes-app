@@ -8,14 +8,14 @@ export default {
 
         Vue.mixin({
             created() {
-                if (this.handleLoginEvent) {
-                    authService.addListener('loginEvent', this.handleLoginEvent);
+                if (this.handleLogin) {
+                    authService.addListener('loginEvent', this.handleLogin);
                 }
             },
 
             destroyed() {
-                if (this.handleLoginEvent) {
-                    authService.removeListener('loginEvent', this.handleLoginEvent);
+                if (this.handleLogin) {
+                    authService.removeListener('loginEvent', this.handleLogin);
                 }
             }
         });

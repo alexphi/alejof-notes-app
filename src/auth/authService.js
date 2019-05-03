@@ -26,7 +26,7 @@ class AuthService extends EventEmitter {
             appState: customState
         });
     }
-    
+
     // Handles the callback request from Auth0
     handleAuthentication() {
         return new Promise((resolve, reject) => {
@@ -90,8 +90,7 @@ class AuthService extends EventEmitter {
 
     isAuthenticated() {
         return (
-            Date.now() < this.tokenExpiry &&
-            localStorage.getItem(localStorageKey) === 'true'
+            Date.now() < this.tokenExpiry && localStorage.getItem(localStorageKey) === 'true'
         );
     }
 }
