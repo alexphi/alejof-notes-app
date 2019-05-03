@@ -1,4 +1,4 @@
-# alejof-blog-vue
+# alejof-notes-app
 
 ## Project setup
 ```
