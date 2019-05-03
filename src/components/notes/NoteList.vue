@@ -1,10 +1,11 @@
 <template>
     <div>
-        <a
-            class="float-right btn btn-sm btn-outline-secondary right-h2-btn"
-            href="#"
-        >New entry</a>
-        <h2>Let's write stuff</h2>
+        <div class="notes-header command-header">
+            <a class="float-right btn btn-sm btn-outline-secondary right-h2-btn"
+               href="#">New entry</a>
+            <h2>Let's write stuff</h2>
+        </div>
+
         <div class="list-group list-group-flush">
             <a href="#"
                class="list-group-item">

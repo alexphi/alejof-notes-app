@@ -18,7 +18,17 @@ const routes = [
         path: '/callback',
         name: 'callback',
         component: Callback
-    }
+    },
+    {
+        path: '/new',
+        name: 'new',
+        component: () => import(/* webpackChunkName: "new-entry"  */ './views/New.vue')
+    },
+    {
+        path: '/list',
+        name: 'list',
+        component: () => import(/* webpackChunkName: "list-entry"  */ './views/List.vue')
+    },
 ];
 
 const router = new Router({
@@ -27,7 +37,10 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-    if (to.path === "/" || to.path === "/callback" || auth.isAuthenticated()) {
+    const isAuthenticated = auth.isAuthenticated()
+    console.log(`> Navigating to ${to}. Authenticated = ${isAuthenticated}`)
+
+    if (to.path === "/" || to.path === "/callback" || isAuthenticated) {
         return next();
     }
 
