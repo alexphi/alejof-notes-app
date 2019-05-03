@@ -4,16 +4,16 @@
 
         <hr />
         <div v-if="!isLoggedIn">
-            <p>
-                Please log in to continue to app
+            <p v-if="isNotAllowed" class="text-muted">
+                You're not allowed to access this app (yet)
             </p>
-            <p>
-                <a class="btn btn-sm btn-outline-secondary" href="#" @click.prevent="login">Login</a>
+            <p v-else>
+                Please <a class="command-link" href="#" @click.prevent="login">log in</a> to continue
             </p>
         </div>
         <div v-else>
             <p class="small">
-                Logged in as {{ nickname }} &bull; <a href="#" @click.prevent="logout">Logout</a>
+                Logged in as {{ nickname }} &bull; <a href="#" @click.prevent="logout">logout</a>
             </p>
         </div>
     </div>
@@ -35,7 +35,8 @@ export default {
            return this.profile ? this.profile.nickname : 'unknown'
         },
         ...Vuex.mapState([
-            'isLoggedIn'
+            'isLoggedIn',
+            'isNotAllowed'
         ])
     },
 
@@ -76,6 +77,8 @@ hr {
 
 .command-link {
     font-weight: 700;
+    font-family: 'Abel', sans-serif;
+    font-size: 1.1em;
 }
 
 </style>

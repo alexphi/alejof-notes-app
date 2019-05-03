@@ -1,14 +1,23 @@
 <template>
     <div>
-        <p class="header-img-small">
+        <p class="header-img">
             <img src="https://blob.alejof.dev/assets/code-icon-light.png">
         </p>
+        <h1><input type="text" placeholder="a catchy title" /></h1>
+        <p class="small">
+            this will be
+            <a href="#" class="command-link">plain text</a> &bull;
+            <a href="#" class="command-link">a link</a> &bull;
+            <a href="#" class="command-link">a quote</a>
+        </p>
 
-        <h2>New entry</h2>
+        <div class="view-content">
+            <textarea placeholder="content goes here" class="form-control"></textarea>
+        </div>
 
         <hr />
         <p>
-            <router-link to="/" class="command-link"><i class="fas fa-angle-left"></i>&nbsp;Go back</router-link>.
+            <router-link to="/drafts" class="command-link">i'm done</router-link>.
         </p>
     </div>
 </template>
@@ -18,9 +27,3 @@ export default {
 
 }
 </script>
-
-<style>
-.header-img-small img {
-    max-height: 50px;
-}
-</style>

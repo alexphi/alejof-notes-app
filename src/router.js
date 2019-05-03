@@ -25,9 +25,14 @@ const routes = [
         component: () => import(/* webpackChunkName: "entry-new"  */ './views/New.vue')
     },
     {
-        path: '/list',
-        name: 'list',
-        component: () => import(/* webpackChunkName: "entry-list"  */ './views/List.vue')
+        path: '/drafts',
+        name: 'drafts',
+        component: () => import(/* webpackChunkName: "entry-drafts"  */ './views/Drafts.vue')
+    },
+    {
+        path: '/published',
+        name: 'published',
+        component: () => import(/* webpackChunkName: "entry-published"  */ './views/Published.vue')
     },
 ];
 
