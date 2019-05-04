@@ -33,6 +33,10 @@ textarea:focus,
     width: 100%;
 }
 
+.col-form-label {
+    color: #495057;
+}
+
 .header-img {
     margin-top: 50px;
 }
