@@ -20,9 +20,9 @@ const routes = [
         component: Callback
     },
     {
-        path: '/new',
-        name: 'new',
-        component: () => import(/* webpackChunkName: "entry-new"  */ './views/New.vue')
+        path: '/editor',
+        name: 'editor',
+        component: () => import(/* webpackChunkName: "entry-new"  */ './views/Editor.vue')
     },
     {
         path: '/drafts',

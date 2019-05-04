@@ -13,50 +13,12 @@
         </div>
 
         <div class="view-content">
-            <div class="list-group">
-                <div class="list-group-item hover-trigger">
-                    <div class="d-flex w-100 justify-content-between">
-                        <p class="mb-0"><strong>note title</strong></p>
-                        <p class="mb-0">3 days ago</p>
-                    </div>
-                    <div class="d-flex w-100 justify-content-between">
-                        <small>plain text</small>
-                        <small class="hover-commands">
-                            <a href="#" class="command-link">unpublish</a>
-                        </small>
-                    </div>
-                </div>
-                <div class="list-group-item hover-trigger">
-                    <div class="d-flex w-100 justify-content-between">
-                        <p class="mb-0"><strong>note title</strong></p>
-                        <p class="mb-0">3 days ago</p>
-                    </div>
-                    <div class="d-flex w-100 justify-content-between">
-                        <small>a link to <span class="text-muted">google.com</span></small>
-                        <small class="hover-commands">
-                            <a href="#" class="command-link">unpublish</a>
-                        </small>
-                    </div>
-                </div>
-                <div class="list-group-item hover-trigger">
-                    <div class="d-flex w-100 justify-content-between">
-                        <p class="mb-0"><strong>note title</strong></p>
-                        <p class="mb-0">3 days ago</p>
-                    </div>
-                    <div class="d-flex w-100 justify-content-between">
-                        <small>a quote from <span class="text-muted">myself</span></small>
-                        <small class="hover-commands">
-                            <a href="#" class="command-link">unpublish</a>
-                        </small>
-                    </div>
-                </div>
-            </div>
+            <note-list :published="true"></note-list>
         </div>
 
-        <hr />
         <p>
             <router-link
-                to="/new"
+                to="/editor"
                 class="btn btn-sm btn-outline-secondary"
             >create a new entry</router-link>
             &nbsp;or <router-link
@@ -68,5 +30,11 @@
 </template>
 
 <script>
-export default {};
+import NoteList from '@/components/notes/List.vue'
+
+export default {
+    components: {
+        NoteList
+    }
+};
 </script>

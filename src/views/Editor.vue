@@ -3,8 +3,8 @@
         <p class="header-img">
             <img src="https://blob.alejof.dev/assets/code-icon-light.png">
         </p>
-        <h1><input type="text" placeholder="a catchy title" /></h1>
-        <p class="small">
+        <h1><input type="text" placeholder="a catchy title" v-model="title"/></h1>
+        <p class="small" v-show="title">
             this will be
             <a href="#" class="command-link">plain text</a> &bull;
             <a href="#" class="command-link">a link</a> &bull;
@@ -12,18 +12,22 @@
         </p>
 
         <div class="view-content">
-            <textarea placeholder="content goes here" class="form-control"></textarea>
+            <textarea v-show="title" placeholder="content goes here" class="form-control"></textarea>
         </div>
 
-        <hr />
         <p>
-            <router-link to="/drafts" class="command-link">i'm done</router-link>.
+            <router-link v-if="title" to="/drafts" class="btn btn-sm btn-outline-secondary">done</router-link>
+            <router-link v-else to="/drafts" class="command-link">go back</router-link>
         </p>
     </div>
 </template>
 
 <script>
 export default {
-
+    data() {
+        return {
+            title: ''
+        };
+    }
 }
 </script>
