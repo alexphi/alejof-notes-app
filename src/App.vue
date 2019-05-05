@@ -1,5 +1,8 @@
 <template>
     <div id="app">
+        <p class="header-img">
+            <img src="https://blob.alejof.dev/assets/code-icon-light.png">
+        </p>
         <router-view />
 
         <hr />
@@ -73,12 +76,6 @@ export default {
 hr {
     margin-top: 50px;
     margin-bottom: 15px;
-}
-
-.command-link {
-    font-weight: 700;
-    font-family: 'Abel', sans-serif;
-    font-size: 1.1em;
 }
 
 </style>

@@ -1,0 +1,24 @@
+[
+    {
+        "id": 1,
+        "type": "text",
+        "published": false
+    },
+    {
+        "id": 2,
+        "type": "link",
+        "source": "google.com",
+        "published": false
+    },
+    {
+        "id": 3,
+        "type": "quote",
+        "source": "myself",
+        "published": false
+    },
+    {
+        "id": 4,
+        "type": "text",
+        "published": true
+    }
+]

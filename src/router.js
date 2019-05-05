@@ -22,17 +22,18 @@ const routes = [
     {
         path: '/new',
         name: 'new',
-        component: () => import(/* webpackChunkName: "entry-new"  */ './views/New.vue')
+        component: () => import(/* webpackChunkName: "entry-new"  */ './views/Edit.vue')
     },
     {
-        path: '/drafts',
-        name: 'drafts',
-        component: () => import(/* webpackChunkName: "entry-drafts"  */ './views/Drafts.vue')
+        path: '/edit/:noteId',
+        name: 'edit',
+        component: () => import(/* webpackChunkName: "entry-new"  */ './views/Edit.vue'),
+        props: true,
     },
     {
-        path: '/published',
-        name: 'published',
-        component: () => import(/* webpackChunkName: "entry-published"  */ './views/Published.vue')
+        path: '/list',
+        name: 'list',
+        component: () => import(/* webpackChunkName: "entry-drafts"  */ './views/List.vue')
     },
 ];
 
@@ -42,10 +43,7 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-    const isAuthenticated = auth.isAuthenticated()
-    console.log(`> Navigating to ${to.path}. Authenticated = ${isAuthenticated}`)
-
-    if (to.path === "/" || to.path === "/callback" || isAuthenticated) {
+    if (to.path === "/" || to.path === "/callback" || auth.isAuthenticated()) {
         return next();
     }
 
