@@ -33,8 +33,10 @@ textarea:focus,
     width: 100%;
 }
 
-.col-form-label {
-    color: #495057;
+.command-link {
+    font-weight: 700;
+    font-family: 'Abel', sans-serif;
+    font-size: 1.1em;
 }
 
 .header-img {
@@ -66,7 +68,6 @@ textarea:focus,
 .hover-trigger:active .hover-commands {
     display: inline;
 }
-
 
 @media (min-width: 768px) {
     body {

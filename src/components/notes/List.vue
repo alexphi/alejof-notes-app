@@ -1,20 +1,36 @@
 <template>
     <div class="list-group">
-        <list-item type="plain text" :published="published"></list-item>
-        <list-item type="a link to" source="google.com" :published="published"></list-item>
-        <list-item type="a quote from" source="myself" :published="published"></list-item>
+        <list-item v-for="item in items" :key="item.id" v-bind="item"></list-item>
     </div>
 </template>
 
 <script>
 import ListItem from './ListItem.vue'
 
+// test data
+import items from '@/data/items.json'
+
 export default {
     components: {
         ListItem
     },
     props: {
-        published: Boolean
+        published: {
+            type: Boolean,
+            default: false,
+            required: false,
+        }
+    },
+    data() {
+        return {
+            items: []
+        }
+    },
+
+    mounted() {
+        // TODO: Load data
+        this.items = items.filter(
+            i => i.published === this.published);
     }
 };
 </script>

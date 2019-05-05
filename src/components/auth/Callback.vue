@@ -2,9 +2,6 @@
 
 <template>
     <div>
-        <p class="header-img">
-            <img src="https://blob.alejof.dev/assets/code-icon-light.png">
-        </p>
         <div class="spinner-grow" role="status">
             <span class="sr-only">Loading...</span>
         </div>
