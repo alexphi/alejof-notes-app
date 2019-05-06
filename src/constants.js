@@ -7,5 +7,10 @@ export default {
         TEXT: 'text',
         LINK: 'link',
         QUOTE: 'quote'
+    },
+    Events: {
+        ENTRY_SAVED: 'saved',
+        ENTRY_DELETED: 'deleted',
+        ENTRY_UNPUBLISHED: 'unpublished'
     }
 }

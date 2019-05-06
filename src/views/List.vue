@@ -1,8 +1,6 @@
 <template>
     <div>
-        <transition
-            name="component-fade"
-            mode="out-in">
+        <transition name="component-fade" mode="out-in">
             <div v-if="!published">
                 <div class="d-flex w-80 justify-content-between">
                     <h1>drafts</h1>
@@ -66,3 +64,22 @@ export default {
     }
 };
 </script>
+
+<style>
+
+.v-enter-active, .v-leave-active {
+    transition: opacity 1s;
+}
+.v-enter, .v-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+}
+
+.component-fade-enter-active, .component-fade-leave-active {
+    transition: opacity 0.5s ease;
+  }
+.component-fade-enter, .component-fade-leave-to
+/* .component-fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+}
+
+</style>

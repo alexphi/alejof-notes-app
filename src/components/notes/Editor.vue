@@ -54,7 +54,7 @@ export default {
     },
     data() {
         return {
-            loading: false,
+            loading: true,
             entry: {
                 title: '',
                 type: '',
@@ -82,9 +82,10 @@ export default {
     mounted() {
         if (this.noteId) {
             // TODO: Load data
-            this.loading = true;
             this.entry.title = `Note ${this.noteId}`;
         }
+
+        this.loading = false;
     },
 
     methods: {
@@ -95,7 +96,7 @@ export default {
         save() {
             // TODO: Save data
 
-            this.$emit('saved');
+            this.$emit(Constants.Events.ENTRY_SAVED, this.noteId);
         }
     }
 }
