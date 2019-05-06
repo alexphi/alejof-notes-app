@@ -1,7 +1,7 @@
 <template>
     <div>
-        <h1>notes app</h1>
-        <p>Here I write some things to display on the <a href="https://alejof.dev">main site</a></p>
+        <h1>AlejoF Notes app</h1>
+        <p>Here I write some things to display on the <a href="https://alejof.dev">main site</a>.</p>
 
         <div v-if="isLoggedIn">
             <p>
