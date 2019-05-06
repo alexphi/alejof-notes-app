@@ -19,19 +19,21 @@
             ].
         </p>
 
-        <div class="view-content">
-            <div v-show="entry.type" class="form">
-                <div class="form-group">
-                    <input type="text" name="slug" placeholder="slug" v-model="slug" />
-                </div>
-                <div v-if="!isText" class="form-group">
-                    <input type="text" placeholder="source" v-model="entry.source" />
-                </div>
-                <div class="form-group">
-                    <textarea placeholder="content (markdown ftw!)" v-model="entry.content"></textarea>
-                </div>
+        <div v-if="entry.type" class="form">
+            <div class="form-group">
+                <label class="small" for="slug">slug</label>
+                <input type="text" name="slug" placeholder="slug" v-model="slug" />
+            </div>
+            <div v-if="!isText" class="form-group">
+                <label class="small" for="source">source</label>
+                <input type="text" name="source" placeholder="where did I see it?" v-model="entry.source" />
+            </div>
+            <div class="form-group">
+                <label class="small" for="content">content</label>
+                <textarea placeholder="Stuff with some markdown love" name="content" v-model="entry.content" rows='3'></textarea>
             </div>
         </div>
+        <div v-else class="view-content"></div>
 
         <p>
             <a v-if="entry.type" href="#" @click.prevent="save" class="btn btn-sm btn-outline-secondary">done</a>

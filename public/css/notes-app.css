@@ -11,8 +11,21 @@ body {
   color: #233142;
 }
 
-a, a:hover {
-    color: #6c757d;
+a,
+a:hover {
+    color: #687C94;
+}
+
+.btn-outline-secondary {
+    color: #687C94;
+    border-color: #687C94;
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-secondary:active {
+    color: #fff;
+    border-color: #687C94;
+    background-color: #687C94;
 }
 
 i {
@@ -31,6 +44,11 @@ textarea:focus,
     padding: 0;
     height: auto;
     width: 100%;
+}
+
+input:placeholder,
+textarea:placeholder {
+    color: #a0a0a0;
 }
 
 .command-link {
