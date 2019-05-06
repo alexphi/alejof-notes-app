@@ -3,6 +3,8 @@
         <h1>AlejoF Notes app</h1>
         <p>Here I write some things to display on the <a href="https://alejof.dev">main site</a>.</p>
 
+        <div class="view-content"></div>
+
         <div v-if="isLoggedIn">
             <p>
                 <router-link to="/new" class="btn btn-sm btn-outline-secondary">create a new entry</router-link>
