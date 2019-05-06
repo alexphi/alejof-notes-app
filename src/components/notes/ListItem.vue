@@ -9,10 +9,10 @@
             <small class="hover-commands">
                 <template v-if="!published">
                     <router-link :to="'/edit/' + id" class="command-link">edit</router-link> &bull;
-                    <a href="#" class="command-link">delete</a>
+                    <a href="#" @click.prevent="deleteEntry" class="command-link">delete</a>
                 </template>
                 <template v-else>
-                    <a href="#" class="command-link">unpublish</a>
+                    <a href="#" @click.prevent="unpublishEntry" class="command-link">unpublish</a>
                 </template>
             </small>
         </div>
@@ -53,6 +53,23 @@ export default {
                     'a link from'
                     : 'some text';
         }
+    },
+
+    methods: {
+        deleteEntry() {
+            if (confirm('Are you sure?')) {
+                // TODO: Delete note
+                
+                this.$emit(Constants.Events.ENTRY_DELETED, this.id);
+            }
+        },
+        unpublishEntry() {
+            if (confirm('Are you sure?')) {
+                // TODO: Update note
+
+                this.$emit(Constants.Events.ENTRY_UNPUBLISHED, this.id);
+            }
+        },
     }
 };
 </script>
