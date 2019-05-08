@@ -73,7 +73,7 @@ export default {
 
         slug: {
             get() {
-                return this.entry.slug || slugify(this.entry.title, { remove: /[*+~.()'"!:@]/g });
+                return this.entry.slug || slugify(this.entry.title, { remove: /[*+~.()'"!:@]/g }).toLowerCase();
             },
             set(value) {
                 this.entry.slug = value
@@ -96,6 +96,7 @@ export default {
         setQuote() { this.entry.type = Constants.EntryTypes.QUOTE; },
 
         save() {
+            this.entry.slug = this.slug;
             // TODO: Save data
 
             this.$emit(Constants.Events.ENTRY_SAVED, this.noteId);

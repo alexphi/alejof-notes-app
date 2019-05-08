@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>AlejoF Notes app</h1>
-        <p>Here I write some things to display on the <a href="https://alejof.dev">main site</a>.</p>
+        <p>Here I write some things to display on the <a href="https://alejof.dev/notes">main site</a>.</p>
 
         <div class="view-content"></div>
 
@@ -20,7 +20,9 @@ import Vuex from "vuex";
 export default {
     name: "home",
     computed: {
-        ...Vuex.mapState(["isLoggedIn"])
+        ...Vuex.mapState([
+            'isLoggedIn'
+        ])
     }
 };
 </script>

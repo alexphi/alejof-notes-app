@@ -16,7 +16,7 @@
         </div>
         <div v-else>
             <p class="small">
-                Logged in as {{ nickname }} &bull; <a href="#" @click.prevent="logout">logout</a>
+                Logged in as {{ nickname }} &bull; <span v-if="token">auth token {{token}} &bull; </span> <a href="#" @click.prevent="logout">logout</a>
             </p>
         </div>
     </div>
@@ -28,18 +28,17 @@ import Constants from '@/constants'
 
 export default {
     name: "app",
-    data() {
-        return {
-            profile: {}
-        };
-    },
     computed: {
         nickname() {
-           return this.profile ? this.profile.nickname : 'unknown'
+           return this.authData ? this.authData.profile.nickname : 'unknown'
+        },
+        token() {
+            return (this.authData && this.authData.token) ? 'valid' : '';
         },
         ...Vuex.mapState([
             'isLoggedIn',
-            'isNotAllowed'
+            'isNotAllowed',
+            'authData'
         ])
     },
 
@@ -60,8 +59,7 @@ export default {
         },
 
         handleLogin(data) {
-            this.$store.commit(Constants.Mutations.SET_LOGGED_IN, data.loggedIn)
-            this.profile = data.profile
+            this.$store.commit(Constants.Mutations.SET_AUTH_DATA, data)
         }
     }
 };

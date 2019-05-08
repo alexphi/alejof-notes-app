@@ -50,6 +50,7 @@ class AuthService extends EventEmitter {
 
         this.emit(loginEvent, {
             loggedIn: true,
+            token: authResult.idToken,
             profile: authResult.idTokenPayload,
             state: authResult.appState || {}
         });
