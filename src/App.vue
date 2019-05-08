@@ -3,7 +3,10 @@
         <p class="header-img">
             <img src="https://blob.alejof.dev/assets/code-icon-light.png">
         </p>
-        <router-view />
+
+        <transition name="fade" mode="out-in">
+            <router-view />
+        </transition>
 
         <hr />
         <div v-if="!isLoggedIn">
@@ -11,12 +14,12 @@
                 You're not allowed to access this app (yet)
             </p>
             <p v-else>
-                Please <a class="command-link" href="#" @click.prevent="login">log in</a> to continue
+                Hello, me. Please <a class="command-link" href="#" @click.prevent="login">log in</a> to continue
             </p>
         </div>
         <div v-else>
             <p class="small">
-                Logged in as {{ nickname }} &bull; <span v-if="token">auth token {{token}} &bull; </span> <a href="#" @click.prevent="logout">logout</a>
+                Logged in as {{ nickname }} &bull; <a href="#" @click.prevent="logout">logout</a>
             </p>
         </div>
     </div>
@@ -31,9 +34,6 @@ export default {
     computed: {
         nickname() {
            return this.authData ? this.authData.profile.nickname : 'unknown'
-        },
-        token() {
-            return (this.authData && this.authData.token) ? 'valid' : '';
         },
         ...Vuex.mapState([
             'isLoggedIn',
@@ -59,7 +59,12 @@ export default {
         },
 
         handleLogin(data) {
-            this.$store.commit(Constants.Mutations.SET_AUTH_DATA, data)
+            this.$store.commit(Constants.Mutations.SET_AUTH_DATA, data);
+
+            if (data.loggedIn) {
+                this.$http.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
+                console.log('Set default header for http');
+            }
         }
     }
 };
@@ -74,6 +79,13 @@ export default {
 hr {
     margin-top: 50px;
     margin-bottom: 15px;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 
 </style>

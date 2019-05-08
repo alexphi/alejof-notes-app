@@ -26,7 +26,7 @@
             </div>
             <div v-if="!isText" class="form-group">
                 <label class="small" for="source">source</label>
-                <input type="text" name="source" placeholder="where did I see it?" v-model="entry.source" />
+                <input type="text" name="source" :placeholder="sourcePlaceholder" v-model="entry.source" />
             </div>
             <div class="form-group">
                 <label class="small" for="content">content</label>
@@ -37,7 +37,6 @@
 
         <p>
             <a v-if="entry.type" href="#" @click.prevent="save" class="btn btn-sm btn-outline-secondary">done</a>
-            <router-link v-else to="/list" class="command-link">go back</router-link>
         </p>
     </div>
 </template>
@@ -71,6 +70,10 @@ export default {
         isLink()  { return this.entry.type === Constants.EntryTypes.LINK; },
         isQuote() { return this.entry.type === Constants.EntryTypes.QUOTE; },
 
+        sourcePlaceholder() {
+            return this.isLink ? 'where did I see it? (link only)' : 'where is this from? (markdown, baby!)';
+        },
+
         slug: {
             get() {
                 return this.entry.slug || slugify(this.entry.title, { remove: /[*+~.()'"!:@]/g }).toLowerCase();
@@ -81,13 +84,28 @@ export default {
         }
     },
 
-    mounted() {
+    async mounted() {
         if (this.noteId) {
-            // TODO: Load data
-            this.entry.title = `Note ${this.noteId}`;
-        }
+            const url = `drafts/${this.noteId}`;
 
-        this.loading = false;
+            try {
+                const response = await this.$http.get(url);
+                this.entry = response.data;
+                this.loading = false;
+            }
+            catch (error) {
+                this.entry = {
+                    title: '',
+                    type: '',
+                    slug: '',
+                    content: '',
+                    source: ''
+                };
+                console.error(error);
+            }
+        } else {
+            this.loading = false;
+        }
     },
 
     methods: {
@@ -95,12 +113,30 @@ export default {
         setLink()  { this.entry.type = Constants.EntryTypes.LINK; },
         setQuote() { this.entry.type = Constants.EntryTypes.QUOTE; },
 
-        save() {
+        async save() {
             this.entry.slug = this.slug;
-            // TODO: Save data
 
-            this.$emit(Constants.Events.ENTRY_SAVED, this.noteId);
-        }
+            let url = 'drafts'
+            let method = 'post'
+
+            if (this.noteId) {
+                url = `drafts/${this.noteId}`;
+                method = 'put'
+            }
+
+            try {
+                await this.$http.request({
+                    url,
+                    method,
+                    data: this.entry,
+                });
+
+                this.$emit(Constants.Events.ENTRY_SAVED, this.noteId);
+            }
+            catch (error) {
+                console.error(error);
+            }
+        },
     }
 }
 </script>

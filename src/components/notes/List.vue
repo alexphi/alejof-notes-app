@@ -1,20 +1,23 @@
 <template>
-    <div class="list-group">
-        <list-item
-            v-for="item in items"
-            v-bind="item"
-            :key="item.id"
-            @deleted="onDeleted"
-            @unpublished="onUnpublished"
-        ></list-item>
+    <div>
+        <div class="spinner-grow" role="status" v-if="loading">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="list-group">
+            <list-item
+                v-for="item in items"
+                :key="item.id"
+                v-bind="item"
+                v-bind:published="published"
+                @deleted="onDeleted"
+                @unpublished="onUnpublished"
+            ></list-item>
+        </div>
     </div>
 </template>
 
 <script>
 import ListItem from "./ListItem.vue";
-
-// test data
-import items from "@/data/items.json";
 
 export default {
     components: {
@@ -29,13 +32,23 @@ export default {
     },
     data() {
         return {
-            items: []
+            items: [],
+            loading: true,
         };
     },
 
-    mounted() {
-        // TODO: Load data
-        this.items = items.filter(i => i.published === this.published);
+    async mounted() {
+        const url = this.published ? 'notes' : 'drafts';
+
+        try {
+            const response = await this.$http.get(url);
+            this.items = response.data;
+            this.loading = false;
+        }
+        catch (error) {
+            this.items = [];
+            console.error(error);
+        }
     },
 
     methods: {

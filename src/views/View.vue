@@ -1,9 +1,9 @@
 <template>
     <div>
-        <note-editor
+        <note-viewer
             :noteId="noteId"
             @saved="exit">
-        </note-editor>
+        </note-viewer>
         <p>
             <router-link
                 to="/list"
@@ -14,19 +14,19 @@
 </template>
 
 <script>
-import NoteEditor from "@/components/notes/Editor.vue";
+import NoteViewer from "@/components/notes/Viewer.vue";
 
 export default {
-    name: "edit",
+    name: "preview",
     props: {
         noteId: {
             type: String,
             default: "",
-            required: false
+            required: true
         }
     },
     components: {
-        NoteEditor
+        NoteViewer
     },
 
     methods: {
