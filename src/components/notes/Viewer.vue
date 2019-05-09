@@ -116,4 +116,10 @@ export default {
 .markdown-body {
     white-space: pre-wrap;
 }
+
+blockquote {
+    border-left: solid 5px #687C94;
+    padding-left: 15px;
+    font-style: italic;
+}
 </style>
