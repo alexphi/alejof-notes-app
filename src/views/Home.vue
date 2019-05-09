@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>AlejoF Notes app</h1>
-        <p>Here I write some things to display on the <a href="https://alejof.dev">main site</a>.</p>
+        <p>Here I write some things to display on the <a :href="siteUrl">main site</a>.</p>
 
         <div class="view-content"></div>
 
@@ -18,9 +18,16 @@
 import Vuex from "vuex";
 
 export default {
-    name: "home",
+    name: "name",
+    data() {
+        return {
+            siteUrl: process.env.VUE_APP_MAIN_SITE_URL,
+        }
+    },
     computed: {
-        ...Vuex.mapState(["isLoggedIn"])
+        ...Vuex.mapState([
+            'isLoggedIn'
+        ])
     }
 };
 </script>

@@ -33,7 +33,13 @@ const routes = [
     {
         path: '/list',
         name: 'list',
-        component: () => import(/* webpackChunkName: "entry-drafts"  */ './views/List.vue')
+        component: () => import(/* webpackChunkName: "entry-list"  */ './views/List.vue')
+    },
+    {
+        path: '/view/:noteId',
+        name: 'view',
+        component: () => import(/* webpackChunkName: "entry-view"  */ './views/View.vue'),
+        props: true,
     },
 ];
 

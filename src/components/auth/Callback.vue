@@ -18,7 +18,7 @@ export default {
         } catch (e) {
             console.log(`Error authenticating: ${e}`);
 
-            this.$store.commit(Constants.Mutations.SET_NOT_ALLOWED, true);
+            this.$store.commit(Constants.Mutations.SET_NOT_ALLOWED);
             this.$router.push("/");
         }
     },

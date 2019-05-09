@@ -1,8 +1,11 @@
 <template>
     <div class="list-group-item hover-trigger">
         <div class="d-flex w-100 justify-content-between">
-            <p class="mb-0"><strong>note title</strong></p>
-            <p class="mb-0">3 days ago</p>
+            <p class="mb-0"><strong>
+                <router-link v-if="!published" :to="'/view/' + id">{{ title }}</router-link>
+                <span v-else>{{ title }}</span>
+            </strong></p>
+            <p class="mb-0">{{ dateText }}</p>
         </div>
         <div class="d-flex w-100 justify-content-between">
             <small>{{typeText}} <span class="text-muted" v-if="source">{{source}}</span></small>
@@ -25,16 +28,26 @@ import Constants from '@/constants'
 export default {
     props: {
         id: {
-            type: Number,
-            default: 0,
+            type: String,
+            default: '',
             required: true
         },
         type: {
             type: String,
             default: '',
-            required: true
+            required: false
+        },
+        title: {
+            type: String,
+            default: '',
+            required: false
         },
         source: {
+            type: String,
+            default: '',
+            required: false
+        },
+        dateText: {
             type: String,
             default: '',
             required: false
@@ -56,18 +69,30 @@ export default {
     },
 
     methods: {
-        deleteEntry() {
-            if (confirm('Are you sure?')) {
-                // TODO: Delete note
-                
+        async deleteEntry() {
+            if (!confirm('Are you sure?')) return;
+
+            try {
+                const url = `drafts/${this.id}`;
+                await this.$http.delete(url);
+
                 this.$emit(Constants.Events.ENTRY_DELETED, this.id);
             }
+            catch (error) {
+                console.error(error);
+            }
         },
-        unpublishEntry() {
-            if (confirm('Are you sure?')) {
-                // TODO: Update note
+        async unpublishEntry() {
+            if (!confirm('Are you sure?')) return;
+
+            try {
+                const url = `unpublish/${this.id}`;
+                await this.$http.post(url);
 
                 this.$emit(Constants.Events.ENTRY_UNPUBLISHED, this.id);
+            }
+            catch (error) {
+                console.error(error);
             }
         },
     }
