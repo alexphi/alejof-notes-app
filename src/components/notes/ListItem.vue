@@ -76,7 +76,7 @@ export default {
             if (!confirm('Are you sure?')) return;
 
             try {
-                const url = `drafts/${this.id}`;
+                const url = `notes/${this.id}`;
                 await this.$http.delete(url);
 
                 this.$emit(Constants.Events.ENTRY_DELETED, this.id);

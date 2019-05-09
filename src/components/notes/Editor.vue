@@ -19,7 +19,7 @@
             ].
         </p>
 
-        <div v-if="entry.type" class="form">
+        <div v-show="entry.type" class="form">
             <div class="form-group">
                 <label class="small" for="slug">slug</label>
                 <input type="text" name="slug" placeholder="slug" v-model="slug" />
@@ -37,11 +37,10 @@
                     name="content"
                     rows='3'
                     v-model="entry.content"
-                    @input="autoExpand"
                     ref="contentInput"></textarea>
             </div>
         </div>
-        <div v-else class="view-content"></div>
+        <div v-if="!entry.type" class="view-content"></div>
 
         <p>
             <a v-if="entry.type" href="#" @click.prevent="save" class="btn btn-sm btn-outline-secondary">done</a>
@@ -94,15 +93,12 @@ export default {
 
     async mounted() {
         if (this.noteId) {
-            const url = `drafts/${this.noteId}`;
+            const url = `notes/${this.noteId}`;
 
             try {
                 const response = await this.$http.get(url);
                 this.entry = response.data;
                 this.loading = false;
-
-                // fix content input height
-                this.autoExpand();
             }
             catch (error) {
                 this.entry = {
@@ -118,6 +114,13 @@ export default {
             this.loading = false;
         }
     },
+    updated () {
+        this.$nextTick(function () {
+            // Code that will run only after the
+            // entire view has been re-rendered
+            this.autoExpand();
+        })
+    },
 
     methods: {
         setText()  { this.entry.type = Constants.EntryTypes.TEXT; },
@@ -127,11 +130,11 @@ export default {
         async save() {
             this.entry.slug = this.slug;
 
-            let url = 'drafts'
+            let url = 'notes'
             let method = 'post'
 
             if (this.noteId) {
-                url = `drafts/${this.noteId}`;
+                url = `notes/${this.noteId}`;
                 method = 'put'
             }
 

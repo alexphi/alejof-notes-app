@@ -73,7 +73,7 @@ export default {
 
     async mounted() {
         if (this.noteId) {
-            const url = `drafts/${this.noteId}`;
+            const url = `notes/${this.noteId}`;
 
             try {
                 const response = await this.$http.get(url);
