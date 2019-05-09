@@ -38,7 +38,7 @@ export default {
     },
 
     async mounted() {
-        const url = this.published ? 'notes' : 'drafts';
+        const url = `notes?published=${this.published}`;
 
         try {
             const response = await this.$http.get(url);
