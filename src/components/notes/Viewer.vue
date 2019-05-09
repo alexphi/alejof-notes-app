@@ -111,3 +111,9 @@ export default {
     }
 }
 </script>
+
+<style>
+.markdown-body {
+    white-space: pre-wrap;
+}
+</style>

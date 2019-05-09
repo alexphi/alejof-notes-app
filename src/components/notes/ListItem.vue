@@ -8,7 +8,7 @@
             <p class="mb-0">{{ dateText }}</p>
         </div>
         <div class="d-flex w-100 justify-content-between">
-            <small>{{typeText}} <span class="text-muted" v-if="source">{{source}}</span></small>
+            <small>{{ typeText }} <span class="text-muted" v-if="showSource">{{ source }}</span></small>
             <small class="hover-commands">
                 <template v-if="!published">
                     <router-link :to="'/edit/' + id" class="command-link">edit</router-link> &bull;
@@ -65,6 +65,9 @@ export default {
                 : this.type === Constants.EntryTypes.LINK ?
                     'a link from'
                     : 'some text';
+        },
+        showSource() {
+            return this.type !== Constants.EntryTypes.TEXT
         }
     },
 
