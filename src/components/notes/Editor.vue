@@ -24,13 +24,21 @@
                 <label class="small" for="slug">slug</label>
                 <input type="text" name="slug" placeholder="slug" v-model="slug" />
             </div>
+
             <div v-if="!isText" class="form-group">
                 <label class="small" for="source">source</label>
                 <input type="text" name="source" :placeholder="sourcePlaceholder" v-model="entry.source" />
             </div>
+
             <div class="form-group">
                 <label class="small" for="content">content</label>
-                <textarea placeholder="Stuff with some markdown love" name="content" v-model="entry.content" rows='3'></textarea>
+                <textarea
+                    placeholder="Stuff with some markdown love"
+                    name="content"
+                    rows='3'
+                    v-model="entry.content"
+                    @input="autoExpand"
+                    ref="contentInput"></textarea>
             </div>
         </div>
         <div v-else class="view-content"></div>
@@ -92,6 +100,9 @@ export default {
                 const response = await this.$http.get(url);
                 this.entry = response.data;
                 this.loading = false;
+
+                // fix content input height
+                this.autoExpand();
             }
             catch (error) {
                 this.entry = {
@@ -137,6 +148,22 @@ export default {
                 console.error(error);
             }
         },
+
+        autoExpand() {
+            var field = this.$refs.contentInput;
+
+            // Reset field height
+            field.style.height = 'inherit';
+
+            var computed = window.getComputedStyle(field);
+            var height = parseInt(computed.getPropertyValue('border-top-width'), 10)
+                + parseInt(computed.getPropertyValue('padding-top'), 10)
+                + field.scrollHeight
+                + parseInt(computed.getPropertyValue('padding-bottom'), 10)
+                + parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+
+            field.style.height = height + 'px';
+        }
     }
 }
 </script>
