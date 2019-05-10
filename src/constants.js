@@ -11,6 +11,8 @@ export default {
     Events: {
         ENTRY_SAVED: 'saved',
         ENTRY_DELETED: 'deleted',
-        ENTRY_UNPUBLISHED: 'unpublished'
+
+        ENTRY_EDIT: 'edit',
+        ENTRY_PREVIEW: 'preview',
     }
 }

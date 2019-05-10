@@ -2,13 +2,15 @@
     <div>
         <note-editor
             :noteId="noteId"
-            @saved="exit">
+            @saved="exit"
+            @preview="previewNote"
+        >
         </note-editor>
         <p>
             <router-link
                 to="/list"
                 class="command-link"
-            >go back</router-link>.
+            ><i class="fas fa-long-arrow-alt-left"></i>&nbsp;go back</router-link>
         </p>
     </div>
 </template>
@@ -32,6 +34,9 @@ export default {
     methods: {
         exit() {
             this.$router.push("/list");
+        },
+        previewNote(noteId) {
+            this.$router.push(`/view/${noteId}`);
         }
     }
 };
