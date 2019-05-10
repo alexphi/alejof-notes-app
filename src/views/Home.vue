@@ -7,8 +7,14 @@
 
         <div v-if="isLoggedIn">
             <p>
-                <router-link to="/new" class="btn btn-sm btn-outline-secondary">create a new entry</router-link>
-                &nbsp;or <router-link to="/list" class="command-link">browse</router-link> existing ones.
+                <router-link
+                    to="/new"
+                    class="btn btn-sm btn-outline-secondary"
+                >create a new entry</router-link>
+                &nbsp;or <router-link
+                    to="/list"
+                    class="command-link"
+                >browse</router-link> existing ones.
             </p>
         </div>
     </div>
@@ -21,13 +27,11 @@ export default {
     name: "name",
     data() {
         return {
-            siteUrl: process.env.VUE_APP_MAIN_SITE_URL,
-        }
+            siteUrl: process.env.VUE_APP_MAIN_SITE_URL
+        };
     },
     computed: {
-        ...Vuex.mapState([
-            'isLoggedIn'
-        ])
+        ...Vuex.mapState(["isLoggedIn"])
     }
 };
 </script>

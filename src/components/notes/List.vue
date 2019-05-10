@@ -1,6 +1,10 @@
 <template>
     <div>
-        <div class="spinner-grow" role="status" v-if="loading">
+        <div
+            class="spinner-grow"
+            role="status"
+            v-if="loading"
+        >
             <span class="sr-only">Loading...</span>
         </div>
         <div class="list-group">
@@ -10,7 +14,6 @@
                 v-bind="item"
                 v-bind:published="published"
                 @deleted="onDeleted"
-                @unpublished="onUnpublished"
             ></list-item>
         </div>
     </div>
@@ -33,7 +36,7 @@ export default {
     data() {
         return {
             items: [],
-            loading: true,
+            loading: true
         };
     },
 
@@ -44,8 +47,7 @@ export default {
             const response = await this.$http.get(url);
             this.items = response.data;
             this.loading = false;
-        }
-        catch (error) {
+        } catch (error) {
             this.items = [];
             console.error(error);
         }
@@ -53,13 +55,6 @@ export default {
 
     methods: {
         onDeleted(noteId) {
-            const index = this.items.findIndex(i => i.id === noteId);
-
-            if (index !== -1) {
-                this.items.splice(index, 1);
-            }
-        },
-        onUnpublished(noteId) {
             const index = this.items.findIndex(i => i.id === noteId);
 
             if (index !== -1) {
