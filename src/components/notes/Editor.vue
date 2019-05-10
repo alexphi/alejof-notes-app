@@ -104,7 +104,7 @@
             >save entry</a>
             &nbsp;or
             <a href="#"
-               @click.prevent="preview"
+               @click.prevent="save(true)"
                class="command-link"
             >preview it</a>.
         </p>
@@ -208,7 +208,7 @@ export default {
             this.entry.type = Constants.EntryTypes.QUOTE;
         },
 
-        async save() {
+        async save(previewAfterSave) {
             this.entry.slug = this.slug;
 
             let url = "notes";
@@ -220,19 +220,26 @@ export default {
             }
 
             try {
-                await this.$http.request({
+                const response = await this.$http.request({
                     url,
                     method,
                     data: this.entry
                 });
 
-                this.$emit(Constants.Events.ENTRY_SAVED, this.noteId);
+                let id = this.noteId;
+                if (!id && response.data.success) {
+                    id = response.data.data.id;
+                }
+
+                if (previewAfterSave) {
+                    this.$emit(Constants.Events.ENTRY_PREVIEW, id);
+                } else {
+                    this.$emit(Constants.Events.ENTRY_SAVED, id);
+                }
+
             } catch (error) {
                 console.error(error);
             }
-        },
-        preview() {
-            this.$emit(Constants.Events.ENTRY_PREVIEW, this.noteId);
         },
 
         autoExpand() {
