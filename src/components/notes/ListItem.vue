@@ -77,14 +77,12 @@ export default {
     },
     computed: {
         typeText() {
-            return this.type === Constants.EntryTypes.QUOTE
-                ? "a quote from"
-                : this.type === Constants.EntryTypes.LINK
-                    ? "a link from"
-                    : "some text";
+            return this.type === Constants.EntryTypes.LINK
+                ? "a link to"
+                : "some text";
         },
         showSource() {
-            return this.type !== Constants.EntryTypes.TEXT;
+            return this.type === Constants.EntryTypes.LINK;
         }
     },
 

@@ -34,14 +34,6 @@
                 class="command-link"
             >link</a>
             <strong v-else>link</strong>
-            &bull;
-            <a
-                v-if="!isQuote"
-                href="#"
-                @click.prevent="setQuote"
-                class="command-link"
-            >quote</a>
-            <strong v-else>quote</strong>
             ].
         </p>
 
@@ -73,7 +65,7 @@
                 <input
                     type="text"
                     name="source"
-                    :placeholder="sourcePlaceholder"
+                    placeholder="where did I see it?"
                     v-model="entry.source"
                 />
             </div>
@@ -99,7 +91,7 @@
 
         <p v-if="entry.type">
             <a href="#"
-               @click.prevent="save"
+               @click.prevent="save(false)"
                class="btn btn-sm btn-outline-secondary"
             >save entry</a>
             &nbsp;or
@@ -141,15 +133,6 @@ export default {
         },
         isLink() {
             return this.entry.type === Constants.EntryTypes.LINK;
-        },
-        isQuote() {
-            return this.entry.type === Constants.EntryTypes.QUOTE;
-        },
-
-        sourcePlaceholder() {
-            return this.isLink
-                ? "where did I see it? (link only)"
-                : "where is this from? (markdown, baby!)";
         },
 
         slug: {
@@ -203,9 +186,6 @@ export default {
         },
         setLink() {
             this.entry.type = Constants.EntryTypes.LINK;
-        },
-        setQuote() {
-            this.entry.type = Constants.EntryTypes.QUOTE;
         },
 
         async save(previewAfterSave) {

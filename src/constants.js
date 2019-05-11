@@ -5,8 +5,7 @@ export default {
     },
     EntryTypes: {
         TEXT: 'text',
-        LINK: 'link',
-        QUOTE: 'quote'
+        LINK: 'link'
     },
     Events: {
         ENTRY_SAVED: 'saved',
