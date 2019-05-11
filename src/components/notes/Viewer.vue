@@ -21,18 +21,7 @@
         </div>
 
         <div class="view-content">
-            <template v-if="isQuote">
-                <blockquote>
-                    <vue-simple-markdown :source="entry.content" />
-                </blockquote>
-
-                <small>
-                    <vue-simple-markdown :source="entry.source" />
-                </small>
-            </template>
-            <template v-else>
-                <vue-simple-markdown :source="entry.content" />
-            </template>
+            <vue-simple-markdown :source="entry.content" />
         </div>
 
         <p v-if="entry.type">
@@ -81,15 +70,10 @@ export default {
         isLink() {
             return this.entry.type === Constants.EntryTypes.LINK;
         },
-        isQuote() {
-            return this.entry.type === Constants.EntryTypes.QUOTE;
-        },
 
         typeText() {
             if (!this.entry) return "";
-            return this.entry.type === Constants.EntryTypes.QUOTE
-                ? "a quote"
-                : this.entry.type === Constants.EntryTypes.LINK
+            return this.entry.type === Constants.EntryTypes.LINK
                 ? "a link"
                 : "text";
         }
