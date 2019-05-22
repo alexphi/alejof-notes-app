@@ -2,7 +2,7 @@
     <div>
         <h1><input
                 type="text"
-                :placeholder="loading ? 'loading note' : 'a catchy title'"
+                :placeholder="loading ? 'loading note...' : 'a catchy title'"
                 v-model="entry.title"/>
         </h1>
 
