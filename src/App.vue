@@ -1,24 +1,24 @@
 <template>
     <div id="app">
-        <p class="header-img">
+        <p :class="headerType">
             <router-link to="/">
             <img src="https://blob.alejof.dev/assets/code-icon-light.png">
             </router-link>
         </p>
 
-        <transition
-            name="fade"
-            mode="out-in"
-        >
-            <router-view />
-        </transition>
+        <div :class="`content-after-${headerType}`">
+            <transition
+                name="fade"
+                mode="out-in">
+                <router-view />
+            </transition>
+        </div>
 
         <hr />
         <div v-if="!isLoggedIn">
             <p
                 v-if="isNotAllowed"
-                class="text-muted"
-            >
+                class="text-muted">
                 You're not allowed to access this app (yet)
             </p>
             <p v-else>
@@ -33,8 +33,7 @@
             <p class="small">
                 Logged in as {{ nickname }} &bull; <a
                     href="#"
-                    @click.prevent="logout"
-                >logout</a>
+                    @click.prevent="logout">logout</a>
             </p>
         </div>
     </div>
@@ -50,10 +49,21 @@ export default {
         nickname() {
             return this.authData ? this.authData.profile.nickname : "unknown";
         },
-        ...Vuex.mapState(["isLoggedIn", "isNotAllowed", "authData"])
+        ...Vuex.mapState(["isLoggedIn", "isNotAllowed", "authData", "headerType"])
     },
 
     async created() {
+        // Add navigation guards
+        this.$router.beforeEach((to, from, next) => {
+            if (to.name === "new" || to.name === "edit" || to.name === "view") {
+                this.$store.commit(Constants.Mutations.SET_HEADER_TYPE, Constants.HeaderTypes.SMALL)
+            } else {
+                this.$store.commit(Constants.Mutations.SET_HEADER_TYPE, Constants.HeaderTypes.NORMAL)
+            }
+
+            return next();
+        });
+
         try {
             await this.$auth.renewTokens();
         } catch (e) {

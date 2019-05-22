@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import auth from "./auth/authService";
+import Auth from "./auth/authService";
 
 import Callback from './components/auth/Callback.vue'
-
 import Home from "./views/Home.vue";
 
 Vue.use(Router)
@@ -49,13 +48,13 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-    if (to.path === "/" || to.path === "/callback" || auth.isAuthenticated()) {
+    if (to.path === "/" || to.path === "/callback" || Auth.isAuthenticated()) {
         return next();
     }
 
     // Specify the current path as the customState parameter, meaning it
     // will be returned to the application after auth
-    auth.login({ target: to.path });
+    Auth.login({ target: to.path });
 });
 
 export default router;
