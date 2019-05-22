@@ -61,8 +61,24 @@ textarea:placeholder {
     margin-top: 50px;
 }
 
+.header-img-edit {
+    margin-top: 50px;
+}
+
+.header-img-edit img {
+    max-height: 50px;
+}
+
+.content-after-header-img {
+    margin-top: 0px;
+}
+
+.content-after-header-img-edit {
+    margin-top: 0px;
+}
+
 .view-content {
-    margin: 60px 0px;
+    margin: 40px 0px;
 }
 
 .list-group-item {
@@ -90,5 +106,19 @@ textarea:placeholder {
 @media (min-width: 768px) {
     body {
         background-image: none;
+    }
+
+    .header-img-edit {
+        margin-top: 10px;
+        margin-left: -60px;
+        float: left;
+    }
+
+    .header-img-edit img {
+        max-height: 30px;
+    }
+
+    .content-after-header-img-edit {
+        margin-top: 50px;
     }
 }

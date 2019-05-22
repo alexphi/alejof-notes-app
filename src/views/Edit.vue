@@ -6,12 +6,6 @@
             @preview="previewNote"
         >
         </note-editor>
-        <p>
-            <router-link
-                to="/list"
-                class="command-link"
-            ><i class="fas fa-long-arrow-alt-left"></i>&nbsp;go back</router-link>
-        </p>
     </div>
 </template>
 

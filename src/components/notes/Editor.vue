@@ -3,65 +3,43 @@
         <h1><input
                 type="text"
                 :placeholder="loading ? 'loading note' : 'a catchy title'"
-                v-model="entry.title"
-            /></h1>
+                v-model="entry.title"/>
+        </h1>
 
         <div
             v-if="loading"
             class="spinner-grow"
-            role="status"
-        >
+            role="status">
             <span class="sr-only">Loading...</span>
         </div>
 
         <p
             class="small"
-            v-show="entry.title"
-        >
+            v-show="entry.title">
             this will be a [
             <a
                 v-if="!isText"
                 href="#"
                 @click.prevent="setText"
                 class="command-link"
-            >plain text</a>
-            <strong v-else>text note</strong>
+            >text</a>
+            <strong v-else>text</strong>
             &bull;
             <a
                 v-if="!isLink"
                 href="#"
                 @click.prevent="setLink"
-                class="command-link"
-            >link</a>
+                class="command-link">link</a>
             <strong v-else>link</strong>
-            ].
+            ] note.
         </p>
 
         <div
             v-show="entry.type"
-            class="form"
-        >
-            <div class="form-group">
-                <label
-                    class="small"
-                    for="slug"
-                >slug</label>
-                <input
-                    type="text"
-                    name="slug"
-                    placeholder="slug"
-                    v-model="slug"
-                />
-            </div>
-
+            class="form view-content">
             <div
                 v-if="!isText"
-                class="form-group"
-            >
-                <label
-                    class="small"
-                    for="source"
-                >source</label>
+                class="form-group">
                 <input
                     type="text"
                     name="source"
@@ -71,12 +49,8 @@
             </div>
 
             <div class="form-group">
-                <label
-                    class="small"
-                    for="content"
-                >content</label>
                 <textarea
-                    placeholder="Stuff with some markdown love"
+                    placeholder="what do I want it to be? (show some markdown love)"
                     name="content"
                     rows='3'
                     v-model="entry.content"
@@ -90,15 +64,24 @@
         ></div>
 
         <p v-if="entry.type">
-            <a href="#"
-               @click.prevent="save(false)"
-               class="btn btn-sm btn-outline-secondary"
+            <a
+                href="#"
+                @click.prevent="save(false)"
+                class="btn btn-sm btn-outline-secondary"
             >save entry</a>
             &nbsp;or
-            <a href="#"
-               @click.prevent="save(true)"
-               class="command-link"
+            <a
+                href="#"
+                @click.prevent="save(true)"
+                class="command-link"
             >preview it</a>.
+        </p>
+        <p v-else>
+            <a
+                href="#"
+                @click.prevent="exit"
+                class="command-link"
+            ><i class="fas fa-long-arrow-alt-left"></i>&nbsp;go back</a>
         </p>
     </div>
 </template>
@@ -214,12 +197,15 @@ export default {
                 if (previewAfterSave) {
                     this.$emit(Constants.Events.ENTRY_PREVIEW, id);
                 } else {
-                    this.$emit(Constants.Events.ENTRY_SAVED, id);
+                    this.$emit(Constants.Events.ENTRY_SAVED);
                 }
-
             } catch (error) {
                 console.error(error);
             }
+        },
+
+        exit() {
+            this.$emit(Constants.Events.ENTRY_SAVED);
         },
 
         autoExpand() {

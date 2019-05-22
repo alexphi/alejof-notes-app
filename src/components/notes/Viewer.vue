@@ -1,15 +1,8 @@
 <template>
     <div>
-        <h1>
-            <a
-                v-if="isLink"
-                :href="entry.source"
-                target="_blank"
-            >{{ entry.title }}</a>
-            <span v-else>{{ entry.title }}</span>
-        </h1>
-        <p class="small">
-            {{ entry.slug }}
+        <h1>{{ entry.title }}</h1>
+        <p class="small" v-if="isLink">
+            {{ entry.source }}
         </p>
 
         <div
