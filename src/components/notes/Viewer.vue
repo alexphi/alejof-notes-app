@@ -1,9 +1,7 @@
 <template>
     <div>
-        <h1>{{ entry.title }}</h1>
-        <p class="small" v-if="isLink">
-            {{ entry.source }}
-        </p>
+        <h1 v-if="loading">loading note...</h1>
+        <h1 v-else>l{{ entry.title }}</h1>
 
         <div
             v-if="loading"
@@ -12,6 +10,10 @@
         >
             <span class="sr-only">Loading...</span>
         </div>
+
+        <p class="small" v-if="isLink">
+            {{ entry.source }}
+        </p>
 
         <div class="view-content">
             <vue-simple-markdown :source="entry.content" />
