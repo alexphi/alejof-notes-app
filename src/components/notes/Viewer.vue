@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1 v-if="loading">loading note...</h1>
-        <h1 v-else>l{{ entry.title }}</h1>
+        <h1 v-else>{{ entry.title }}</h1>
 
         <div
             v-if="loading"
