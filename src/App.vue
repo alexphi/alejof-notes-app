@@ -84,7 +84,9 @@ export default {
 
             if (data.loggedIn) {
                 this.$http.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
-                console.log("Set default header for http");
+                this.$http.defaults.headers.common["Notes-Tenant-Id"] = process.env.VUE_APP_API_TENANT;
+
+                console.log("Set default headers for http");
             }
         }
     }
