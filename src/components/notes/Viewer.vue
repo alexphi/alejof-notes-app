@@ -123,9 +123,4 @@ export default {
     white-space: pre-wrap;
 }
 
-blockquote {
-    border-left: solid 5px #687c94;
-    padding-left: 15px;
-    font-style: italic;
-}
 </style>

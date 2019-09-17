@@ -39,7 +39,8 @@
             class="form view-content">
             <div
                 v-if="!isText"
-                class="form-group">
+                class="form-group mb-3">
+                <small>source</small>
                 <input
                     type="text"
                     name="source"
@@ -49,6 +50,7 @@
             </div>
 
             <div class="form-group">
+                <small>content</small>
                 <textarea
                     placeholder="what do I want it to be? (show some markdown love)"
                     name="content"
@@ -60,8 +62,8 @@
         </div>
         <div
             v-if="!entry.type"
-            class="view-content"
-        ></div>
+            class="view-content">
+        </div>
 
         <p v-if="entry.type">
             <a

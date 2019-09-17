@@ -14,7 +14,6 @@
             </transition>
         </div>
 
-        <hr />
         <div v-if="!isLoggedIn">
             <p
                 v-if="isNotAllowed"

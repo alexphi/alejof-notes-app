@@ -11,10 +11,10 @@
             <p class="mb-0">{{ dateText }}</p>
         </div>
         <div class="d-flex w-100 justify-content-between">
-            <small>{{ typeText }} <span
+            <p>{{ typeText }} <span
                     class="text-muted"
                     v-if="showSource"
-                >{{ source }}</span></small>
+                >{{ source }}</span></p>
             <small class="hover-commands">
                 <template v-if="!published">
                     <router-link

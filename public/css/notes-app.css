@@ -1,31 +1,16 @@
 /* revert main-site's styles */
 
-body {
-  background-color: #fff;
-
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
-
-  color: #233142;
-}
-
-a,
-a:hover {
-    color: #687C94;
-}
-
 .btn-outline-secondary {
-    color: #687C94;
-    border-color: #687C94;
+    color: #216583;
+    border-color: #216583;
 }
 
 .btn-outline-secondary:hover,
 .btn-outline-secondary:active {
     color: #fff;
-    border-color: #687C94;
-    background-color: #687C94;
+    border-color: #216583;
+    background-color: #216583;
+    border: solid 1px #216583;
 }
 
 i.fas {
@@ -78,7 +63,7 @@ textarea:placeholder {
 }
 
 .view-content {
-    margin: 40px 0px;
+    margin: 30px 0px;
 }
 
 .list-group-item {
