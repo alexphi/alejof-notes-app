@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import Constants from "@/constants";
+import Constants from "@/constants"
 
 export default {
     props: {
@@ -56,32 +56,39 @@ export default {
                 content: "",
                 source: ""
             }
-        };
+        }
     },
     computed: {
         isText() {
-            return this.entry.type === Constants.EntryTypes.TEXT;
+            return this.entry.type === Constants.EntryTypes.TEXT
         },
         isLink() {
-            return this.entry.type === Constants.EntryTypes.LINK;
+            return this.entry.type === Constants.EntryTypes.LINK
         },
 
         typeText() {
             if (!this.entry) return "";
             return this.entry.type === Constants.EntryTypes.LINK
                 ? "a link"
-                : "text";
+                : "text"
         }
     },
 
     async mounted() {
         if (this.noteId) {
-            const url = `notes/${this.noteId}`;
+            const url = `notes/${this.noteId}`
 
             try {
-                const response = await this.$http.get(url);
-                this.entry = response.data;
-                this.loading = false;
+                const response = await this.$http.get(url)
+                const note = response.data
+
+                this.entry = {
+                    title: note.title,
+                    slug: note.slug,
+                    content: note.content,
+                    type: note.data.Type,
+                    source: note.data.Source,
+                }
             } catch (error) {
                 this.entry = {
                     title: "",
@@ -89,33 +96,35 @@ export default {
                     slug: "",
                     content: "",
                     source: ""
-                };
-                console.error(error);
+                }
+                console.error(error)
+            } finally {
+                this.loading = false;
             }
         } else {
-            this.loading = false;
+            this.loading = false
         }
     },
 
     methods: {
         async publish() {
-            if (!confirm("Are you sure?")) return;
+            if (!confirm("Are you sure?")) return
 
-            const url = `publish/${this.noteId}`;
+            const url = `publish/${this.noteId}`
 
             try {
-                await this.$http.post(url);
+                await this.$http.post(url)
 
-                this.$emit(Constants.Events.ENTRY_SAVED, this.noteId);
+                this.$emit(Constants.Events.ENTRY_SAVED, this.noteId)
             } catch (error) {
-                console.error(error);
+                console.error(error)
             }
         },
         edit() {
-            this.$emit(Constants.Events.ENTRY_EDIT, this.noteId);
+            this.$emit(Constants.Events.ENTRY_EDIT, this.noteId)
         }
     }
-};
+}
 </script>
 
 <style>

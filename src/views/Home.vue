@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import Vuex from "vuex";
+import Vuex from "vuex"
 
 export default {
     name: "name",
@@ -33,5 +33,5 @@ export default {
     computed: {
         ...Vuex.mapState(["isLoggedIn"])
     }
-};
+}
 </script>

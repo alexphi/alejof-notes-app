@@ -14,7 +14,7 @@
             <p>{{ typeText }} <span
                     class="text-muted"
                     v-if="showSource"
-                >{{ source }}</span></p>
+                >{{ sourceDomain }}</span></p>
             <small class="hover-commands">
                 <template v-if="!published">
                     <router-link
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import Constants from "@/constants";
+import Constants from "@/constants"
 
 export default {
     props: {
@@ -79,10 +79,16 @@ export default {
         typeText() {
             return this.type === Constants.EntryTypes.LINK
                 ? "a link to"
-                : "some text";
+                : "some text"
         },
         showSource() {
-            return this.type === Constants.EntryTypes.LINK;
+            return this.type === Constants.EntryTypes.LINK
+        },
+        sourceDomain() {
+            if (!this.showSource) return ""
+
+            const matches = this.source.match(/\b(?:https?:\/\/|www\.)([^ \f\n\r\t\v\]/]+)\b/)
+            return matches[1]
         }
     },
 
@@ -91,26 +97,26 @@ export default {
             if (!confirm("Are you sure?")) return;
 
             try {
-                const url = `notes/${this.id}`;
-                await this.$http.delete(url);
+                const url = `notes/${this.id}`
+                await this.$http.delete(url)
 
-                this.$emit(Constants.Events.ENTRY_DELETED, this.id);
+                this.$emit(Constants.Events.ENTRY_DELETED, this.id)
             } catch (error) {
-                console.error(error);
+                console.error(error)
             }
         },
         async unpublishEntry() {
-            if (!confirm("Are you sure?")) return;
+            if (!confirm("Are you sure?")) return
 
             try {
-                const url = `publish/${this.id}`;
-                await this.$http.delete(url);
+                const url = `publish/${this.id}`
+                await this.$http.delete(url)
 
-                this.$emit(Constants.Events.ENTRY_DELETED, this.id);
+                this.$emit(Constants.Events.ENTRY_DELETED, this.id)
             } catch (error) {
-                console.error(error);
+                console.error(error)
             }
         }
     }
-};
+}
 </script>

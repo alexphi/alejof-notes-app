@@ -14,21 +14,21 @@ import Constants from '@/constants'
 export default {
     async created() {
         try {
-            await this.$auth.handleAuthentication();
+            await this.$auth.handleAuthentication()
         } catch (e) {
-            console.log(`Error authenticating: ${e}`);
+            console.log(`Error authenticating: ${e}`)
 
-            this.$store.commit(Constants.Mutations.SET_NOT_ALLOWED);
-            this.$router.push("/");
+            this.$store.commit(Constants.Mutations.SET_NOT_ALLOWED)
+            this.$router.push("/")
         }
     },
 
     methods: {
         handleLogin(data) {
-            this.$router.push(data.state.target || "/");
+            this.$router.push(data.state.target || "/")
         }
     }
-};
+}
 </script>
 
 <style>

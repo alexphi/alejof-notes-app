@@ -89,8 +89,8 @@
 </template>
 
 <script>
-import slugify from "slugify";
-import Constants from "@/constants";
+import slugify from "slugify"
+import Constants from "@/constants"
 
 export default {
     props: {
@@ -114,10 +114,10 @@ export default {
     },
     computed: {
         isText() {
-            return this.entry.type === Constants.EntryTypes.TEXT;
+            return this.entry.type === Constants.EntryTypes.TEXT
         },
         isLink() {
-            return this.entry.type === Constants.EntryTypes.LINK;
+            return this.entry.type === Constants.EntryTypes.LINK
         },
 
         slug: {
@@ -126,23 +126,29 @@ export default {
                     this.entry.slug ||
                     slugify(this.entry.title, {
                         remove: /[*+~.()'"!:@]/g
-                    }).toLowerCase()
-                );
+                    }).toLowerCase())
             },
             set(value) {
-                this.entry.slug = value;
+                this.entry.slug = value
             }
         }
     },
 
     async mounted() {
         if (this.noteId) {
-            const url = `notes/${this.noteId}`;
+            const url = `notes/${this.noteId}`
 
             try {
-                const response = await this.$http.get(url);
-                this.entry = response.data;
-                this.loading = false;
+                const response = await this.$http.get(url)
+                const note = response.data
+
+                this.entry = {
+                    title: note.title,
+                    slug: note.slug,
+                    content: note.content,
+                    type: note.data.Type,
+                    source: note.data.Source,
+                }
             } catch (error) {
                 this.entry = {
                     title: "",
@@ -150,71 +156,83 @@ export default {
                     slug: "",
                     content: "",
                     source: ""
-                };
-                console.error(error);
+                }
+                console.error(error)
+            } finally {
+                this.loading = false
             }
         } else {
-            this.loading = false;
+            this.loading = false
         }
     },
     updated() {
         this.$nextTick(function() {
             // Code that will run only after the
             // entire view has been re-rendered
-            this.autoExpand();
-        });
+            this.autoExpand()
+        })
     },
 
     methods: {
         setText() {
-            this.entry.type = Constants.EntryTypes.TEXT;
+            this.entry.type = Constants.EntryTypes.TEXT
         },
         setLink() {
-            this.entry.type = Constants.EntryTypes.LINK;
+            this.entry.type = Constants.EntryTypes.LINK
         },
 
         async save(previewAfterSave) {
-            this.entry.slug = this.slug;
+            this.entry.slug = this.slug
 
-            let url = "notes";
-            let method = "post";
+            let url = "notes"
+            let method = "post"
 
             if (this.noteId) {
-                url = `notes/${this.noteId}`;
-                method = "put";
+                url = `notes/${this.noteId}`
+                method = "put"
             }
 
             try {
+                const payload = {
+                    title: this.entry.title,
+                    slug: this.entry.slug,
+                    content: this.entry.content,
+                    data: {
+                        Type: this.entry.type,
+                        Source: this.entry.source,
+                    }
+                }
+
                 const response = await this.$http.request({
                     url,
                     method,
-                    data: this.entry
-                });
+                    data: payload
+                })
 
                 let id = this.noteId;
                 if (!id && response.data.success) {
-                    id = response.data.data.id;
+                    id = response.data.data.id
                 }
 
                 if (previewAfterSave) {
-                    this.$emit(Constants.Events.ENTRY_PREVIEW, id);
+                    this.$emit(Constants.Events.ENTRY_PREVIEW, id)
                 } else {
-                    this.$emit(Constants.Events.ENTRY_SAVED);
+                    this.$emit(Constants.Events.ENTRY_SAVED)
                 }
             } catch (error) {
-                console.error(error);
+                console.error(error)
             }
         },
 
         exit() {
-            this.$emit(Constants.Events.ENTRY_SAVED);
+            this.$emit(Constants.Events.ENTRY_SAVED)
         },
 
         autoExpand() {
-            var field = this.$refs.contentInput;
+            var field = this.$refs.contentInput
 
             // Reset field height
-            field.style.height = "inherit";
+            field.style.height = "inherit"
 
             var computed = window.getComputedStyle(field);
             var height =
@@ -222,10 +240,10 @@ export default {
                 parseInt(computed.getPropertyValue("padding-top"), 10) +
                 field.scrollHeight +
                 parseInt(computed.getPropertyValue("padding-bottom"), 10) +
-                parseInt(computed.getPropertyValue("border-bottom-width"), 10);
+                parseInt(computed.getPropertyValue("border-bottom-width"), 10)
 
-            field.style.height = height + "px";
+            field.style.height = height + "px"
         }
     }
-};
+}
 </script>

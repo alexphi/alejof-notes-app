@@ -53,14 +53,14 @@
 </template>
 
 <script>
-import NoteList from "@/components/notes/List.vue";
+import NoteList from "@/components/notes/List.vue"
 
 export default {
     name: "list",
     data() {
         return {
             published: false
-        };
+        }
     },
 
     components: {
@@ -70,10 +70,10 @@ export default {
 
     methods: {
         viewPublished(value) {
-            this.published = value;
+            this.published = value
         }
     }
-};
+}
 </script>
 
 <style>

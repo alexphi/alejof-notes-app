@@ -14,14 +14,14 @@ export default new Vuex.Store({
     },
     mutations: {
         [Constants.Mutations.SET_AUTH_DATA](state, data) {
-            state.isLoggedIn = data.loggedIn;
-            state.authData = data;
+            state.isLoggedIn = data.loggedIn
+            state.authData = data
         },
         [Constants.Mutations.SET_NOT_ALLOWED](state) {
-            state.isNotAllowed = true;
+            state.isNotAllowed = true
         },
         [Constants.Mutations.SET_HEADER_TYPE](state, data) {
-            state.headerType = data;
+            state.headerType = data
         },
     },
     actions: {

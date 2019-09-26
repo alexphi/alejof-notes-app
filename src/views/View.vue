@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import NoteViewer from "@/components/notes/Viewer.vue";
+import NoteViewer from "@/components/notes/Viewer.vue"
 
 export default {
     name: "preview",
@@ -33,11 +33,11 @@ export default {
 
     methods: {
         exit() {
-            this.$router.push("/list");
+            this.$router.push("/list")
         },
         editNote(noteId) {
-            this.$router.push(`/edit/${noteId}`);
+            this.$router.push(`/edit/${noteId}`)
         }
     }
-};
+}
 </script>

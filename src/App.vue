@@ -39,14 +39,14 @@
 </template>
 
 <script>
-import Vuex from "vuex";
-import Constants from "@/constants";
+import Vuex from "vuex"
+import Constants from "@/constants"
 
 export default {
     name: "app",
     computed: {
         nickname() {
-            return this.authData ? this.authData.profile.nickname : "unknown";
+            return this.authData ? this.authData.profile.nickname : "unknown"
         },
         ...Vuex.mapState(["isLoggedIn", "isNotAllowed", "authData", "headerType"])
     },
@@ -60,36 +60,36 @@ export default {
                 this.$store.commit(Constants.Mutations.SET_HEADER_TYPE, Constants.HeaderTypes.NORMAL)
             }
 
-            return next();
+            return next()
         });
 
         try {
-            await this.$auth.renewTokens();
+            await this.$auth.renewTokens()
         } catch (e) {
-            console.log(`> Error renewing tokens: ${e}`);
+            console.log(`> Error renewing tokens: ${e}`)
         }
     },
 
     methods: {
         login() {
-            this.$auth.login();
+            this.$auth.login()
         },
         logout() {
-            this.$auth.logOut();
+            this.$auth.logOut()
         },
 
         handleLogin(data) {
-            this.$store.commit(Constants.Mutations.SET_AUTH_DATA, data);
+            this.$store.commit(Constants.Mutations.SET_AUTH_DATA, data)
 
             if (data.loggedIn) {
-                this.$http.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
-                this.$http.defaults.headers.common["Notes-Tenant-Id"] = process.env.VUE_APP_API_TENANT;
+                this.$http.defaults.headers.common["Authorization"] = `Bearer ${data.token}`
+                this.$http.defaults.headers.common["Notes-Tenant-Id"] = process.env.VUE_APP_API_TENANT
 
-                console.log("Set default headers for http");
+                console.log("Set default headers for http")
             }
         }
     }
-};
+}
 </script>
 
 <style>

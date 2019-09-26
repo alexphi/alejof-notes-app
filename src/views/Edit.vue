@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import NoteEditor from "@/components/notes/Editor.vue";
+import NoteEditor from "@/components/notes/Editor.vue"
 
 export default {
     name: "edit",
@@ -27,11 +27,11 @@ export default {
 
     methods: {
         exit() {
-            this.$router.push("/list");
+            this.$router.push("/list")
         },
         previewNote(noteId) {
-            this.$router.push(`/view/${noteId}`);
+            this.$router.push(`/view/${noteId}`)
         }
     }
-};
+}
 </script>
