@@ -132,4 +132,9 @@ export default {
     white-space: pre-wrap;
 }
 
+.markdown-body img {
+    max-width: 80%;
+    max-height: 300px;
+}
+
 </style>
