@@ -6,6 +6,7 @@ import AuthPlugin from "./plugins/auth"
 import AxiosPlugin from "./plugins/axios"
 
 import VueSimpleMarkdown from 'vue-simple-markdown'
+import './assets/tailwind.css'
 
 Vue.use(AuthPlugin)
 Vue.use(AxiosPlugin)

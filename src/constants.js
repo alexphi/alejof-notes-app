@@ -9,8 +9,8 @@ export default {
         LINK: 'link'
     },
     HeaderTypes: {
-        NORMAL: 'header-img',
-        SMALL: 'header-img-edit'
+        NORMAL: 'normal',
+        SMALL: 'small'
     },
     Events: {
         ENTRY_SAVED: 'saved',
