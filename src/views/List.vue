@@ -18,7 +18,7 @@
         <a href="#" class="ml-4 font-narrow" @click.prevent="logout">Logout</a>
       </div>
     </div>
-    <div class="flex-grow md:border md:pt-3 border-gray-300 md:my-5 md:rounded md:shadow">
+    <div class="flex-grow md:border md:pt-3 border-gray-300 md:my-5 md:rounded-lg md:shadow">
       <div class="flex flex-row justify-between border-b pl-3">
         <ul class="flex">
           <li class="mr-2">

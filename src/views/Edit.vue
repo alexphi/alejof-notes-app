@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="h-full">
         <note-editor
             :noteId="noteId"
             @saved="exit"
