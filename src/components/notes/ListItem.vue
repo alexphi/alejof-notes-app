@@ -1,122 +1,102 @@
 <template>
-    <div class="list-group-item hover-trigger">
-        <div class="d-flex w-100 justify-content-between">
-            <p class="mb-0"><strong>
-                    <router-link
-                        v-if="!published"
-                        :to="'/view/' + id"
-                    >{{ title }}</router-link>
-                    <span v-else>{{ title }}</span>
-                </strong></p>
-            <p class="mb-0">{{ dateText }}</p>
-        </div>
-        <div class="d-flex w-100 justify-content-between">
-            <p>{{ typeText }} <span
-                    class="text-muted"
-                    v-if="showSource"
-                >{{ sourceDomain }}</span></p>
-            <small class="hover-commands">
-                <template v-if="!published">
-                    <router-link
-                        :to="'/edit/' + id"
-                        class="command-link"
-                    >edit</router-link> &bull;
-                    <a
-                        href="#"
-                        @click.prevent="deleteEntry"
-                        class="command-link"
-                    >delete</a>
-                </template>
-                <template v-else>
-                    <a
-                        href="#"
-                        @click.prevent="unpublishEntry"
-                        class="command-link"
-                    >unpublish</a>
-                </template>
-            </small>
-        </div>
-    </div>
+  <li class="border-b border-gray-300">
+    <router-link :to="'/view/' + id" class="m-px p-4 flex flex-row justify-between no-underline hover:bg-gray-100">
+      <div class="flex-grow mx-2">
+        <p class="mb-0">
+          <strong>{{ title }}</strong>
+        </p>
+        <p class="mb-0 text-gray-600">
+          {{ typeText }}
+          <span class="text-muted" v-if="showSource">{{ sourceDomain }}</span>
+        </p>
+      </div>
+      <div class="text-gray-500 self-center">
+        <svg viewBox="0 0 20 20" fill="currentColor" class="w-6"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+      </div>
+    </router-link>
+  </li>
 </template>
 
 <script>
-import Constants from "@/constants"
+import Constants from "@/constants";
 
 export default {
-    props: {
-        id: {
-            type: String,
-            default: "",
-            required: true
-        },
-        type: {
-            type: String,
-            default: "",
-            required: false
-        },
-        title: {
-            type: String,
-            default: "",
-            required: false
-        },
-        source: {
-            type: String,
-            default: "",
-            required: false
-        },
-        dateText: {
-            type: String,
-            default: "",
-            required: false
-        },
-        published: {
-            type: Boolean,
-            default: false,
-            required: true
-        }
+  props: {
+    id: {
+      type: String,
+      default: "",
+      required: true
     },
-    computed: {
-        typeText() {
-            return this.type === Constants.EntryTypes.LINK
-                ? "a link to"
-                : "some text"
-        },
-        showSource() {
-            return this.type === Constants.EntryTypes.LINK
-        },
-        sourceDomain() {
-            if (!this.showSource) return ""
-
-            const matches = this.source.match(/\b(?:https?:\/\/|www\.)([^ \f\n\r\t\v\]/]+)\b/)
-            return matches[1]
-        }
+    type: {
+      type: String,
+      default: "",
+      required: false
     },
-
-    methods: {
-        async deleteEntry() {
-            if (!confirm("Are you sure?")) return;
-
-            try {
-                const url = `notes/${this.id}`
-                await this.$http.delete(url)
-
-                this.$emit(Constants.Events.ENTRY_DELETED, this.id)
-            } catch (error) {
-                console.error(error)
-            }
-        },
-        async unpublishEntry() {
-            if (!confirm("Are you sure?")) return
-
-            try {
-                const url = `publish/${this.id}`
-                await this.$http.delete(url)
-
-                this.$emit(Constants.Events.ENTRY_DELETED, this.id)
-            } catch (error) {
-                console.error(error)
-            }
-        }
+    title: {
+      type: String,
+      default: "",
+      required: false
+    },
+    source: {
+      type: String,
+      default: "",
+      required: false
+    },
+    dateText: {
+      type: String,
+      default: "",
+      required: false
+    },
+    published: {
+      type: Boolean,
+      default: false,
+      required: true
     }
-}
+  },
+  computed: {
+    typeText() {
+      return this.type === Constants.EntryTypes.LINK
+        ? "a link to"
+        : "some text";
+    },
+    showSource() {
+      return this.type === Constants.EntryTypes.LINK;
+    },
+    sourceDomain() {
+      if (!this.showSource) return "";
+
+      const matches = this.source.match(
+        /\b(?:https?:\/\/|www\.)([^ \f\n\r\t\v\]/]+)\b/
+      );
+      return matches[1];
+    }
+  },
+
+  methods: {
+    async deleteEntry() {
+      if (!confirm("Are you sure?")) return;
+
+      try {
+        const url = `notes/${this.id}`;
+        await this.$http.delete(url);
+
+        this.$emit(Constants.Events.ENTRY_DELETED, this.id);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async unpublishEntry() {
+      if (!confirm("Are you sure?")) return;
+
+      try {
+        const url = `publish/${this.id}`;
+        await this.$http.delete(url);
+
+        this.$emit(Constants.Events.ENTRY_DELETED, this.id);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
+};
 </script>
