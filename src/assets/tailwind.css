@@ -1,3 +1,4 @@
+/* purgecss start ignore */
 @tailwind base;
 
 p {
@@ -27,5 +28,6 @@ img {
 }
 
 @tailwind components;
+/* purgecss end ignore */
 
 @tailwind utilities;
