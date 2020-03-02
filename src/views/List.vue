@@ -23,7 +23,7 @@
         <ul class="flex">
           <li class="mr-2">
             <a
-              class="inline-block py-2 px-4 text-xl no-underline border-gray-600"
+              class="inline-block py-2 px-4 text-xl no-underline border-blue-700"
               :class="published ? '' : 'border-b-4'"
               href="#"
               @click.prevent="viewPublished(false)"
@@ -31,7 +31,7 @@
           </li>
           <li class="mr-2">
             <a
-              class="inline-block py-2 px-4 text-xl no-underline border-gray-600"
+              class="inline-block py-2 px-4 text-xl no-underline border-blue-700"
               :class="published ? 'border-b-4' : ''"
               href="#"
               @click.prevent="viewPublished(true)"

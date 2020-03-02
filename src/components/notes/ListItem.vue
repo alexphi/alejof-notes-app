@@ -10,7 +10,7 @@
         </p>
         <p class="mb-0 text-gray-600">
           {{ typeText }}
-          <span class="text-blue-600" v-if="showSource">{{ sourceDomain }}</span>
+          <span class="text-blue-700" v-if="showSource">{{ sourceDomain }}</span>
         </p>
       </div>
       <div class="text-gray-500 self-center">
