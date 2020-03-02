@@ -4,10 +4,6 @@
       <h1 class="text-2xl" v-if="loading">loading note...</h1>
       <h1 class="text-2xl leading-tight" v-else>{{ entry.title }}</h1>
 
-      <div v-if="loading" class="spinner-grow" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-
       <a
         :href="entry.source"
         target="_blank"
@@ -22,10 +18,10 @@
     <div
       class="py-5 px-4 md:px-8 border-t md:border border-gray-300 md:shadow md:-mx-8 md:mb-4 md:rounded-lg flex flex-row justify-between"
     >
-      <a href="#" @click.prevent="publish" class="font-narrow">publish entry</a>
+      <a href="#" @click.prevent="move" class="font-narrow">{{ moveText }}</a>
       <div class="inline-block">
+        <a href="#" v-if="!published" @click.prevent="edit" class="ml-4 font-narrow">edit</a>
         <a href="#" @click.prevent="goBack" class="ml-4 font-narrow">go back</a>
-        <a href="#" @click.prevent="edit" class="ml-4 font-narrow">edit it</a>
       </div>
     </div>
   </div>
@@ -70,6 +66,9 @@ export default {
     typeText() {
       if (!this.entry) return "";
       return this.entry.type === Constants.EntryTypes.LINK ? "a link" : "text";
+    },
+    moveText() {
+      return this.published ? "unpublish" : "publish";
     }
   },
 
@@ -106,15 +105,16 @@ export default {
   },
 
   methods: {
-    async publish() {
+    async move() {
       if (!confirm("Are you sure?")) return;
 
       const url = `publish/${this.noteId}`;
 
       try {
-        await this.$http.post(url);
+        if (this.published) await this.$http.delete(url);
+        else await this.$http.post(url);
 
-        this.$emit(Constants.Events.ENTRY_SAVED, this.noteId);
+        this.goBack()
       } catch (error) {
         console.error(error);
       }

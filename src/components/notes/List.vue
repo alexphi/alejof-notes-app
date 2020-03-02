@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="spinner-grow" role="status" v-if="loading">
-      <span class="sr-only">Loading...</span>
+    <div v-if="loading" class="p-4 mx-2">
+      <span class="text-gray-400">Loading...</span>
     </div>
     <ul>
       <list-item

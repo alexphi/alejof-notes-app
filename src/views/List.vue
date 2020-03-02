@@ -23,7 +23,7 @@
         <ul class="flex">
           <li class="mr-2">
             <a
-              class="inline-block py-2 px-4 font-narrow border-gray-600"
+              class="inline-block py-2 px-4 text-xl no-underline border-gray-600"
               :class="published ? '' : 'border-b-4'"
               href="#"
               @click.prevent="viewPublished(false)"
@@ -31,14 +31,14 @@
           </li>
           <li class="mr-2">
             <a
-              class="inline-block py-2 px-4 font-narrow border-gray-600"
+              class="inline-block py-2 px-4 text-xl no-underline border-gray-600"
               :class="published ? 'border-b-4' : ''"
               href="#"
               @click.prevent="viewPublished(true)"
             >Published</a>
           </li>
         </ul>
-        <router-link to="/new" class="inline-block py-2 px-4 font-narrow border-gray-600">New entry</router-link>
+        <router-link to="/new" class="hidden md:inline-block py-2 px-4 font-narrow border-gray-600">new entry</router-link>
       </div>
 
       <transition>
@@ -53,7 +53,7 @@
     </div>
 
     <div class="py-5 px-4 text-right border-t border-gray-300 md:hidden">
-      <router-link to="/new" class="font-narrow">New entry</router-link>
+      <router-link to="/new" class="font-narrow">new entry</router-link>
     </div>
   </div>
 </template>
