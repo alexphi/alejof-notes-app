@@ -19,8 +19,8 @@
 
     <div v-if="isLoggedIn">
       <div class="flex justify-between">
-        <router-link to="/new" class="btn btn-sm btn-outline-secondary">create a new entry</router-link>
-        <router-link to="/list" class="command-link">browse drafts</router-link>
+        <router-link to="/new" class="font-narrow">create a new entry</router-link>
+        <router-link to="/list" class="font-narrow">browse drafts</router-link>
       </div>
     </div>
     <div v-else>

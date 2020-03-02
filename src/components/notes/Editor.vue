@@ -4,7 +4,7 @@
       <h1 class="text-2xl">
         <input
           type="text"
-          class="w-full"
+          class="w-full appearance-none focus:outline-none"
           :placeholder="loading ? 'loading note...' : 'a catchy title'"
           v-model="entry.title"
         />
