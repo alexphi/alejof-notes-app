@@ -5,12 +5,18 @@ import store from './store'
 import AuthPlugin from "./plugins/auth"
 import AxiosPlugin from "./plugins/axios"
 
-import VueSimpleMarkdown from 'vue-simple-markdown'
+import VueShowdown from 'vue-showdown'
+
 import './assets/tailwind.css'
 
 Vue.use(AuthPlugin)
 Vue.use(AxiosPlugin)
-Vue.use(VueSimpleMarkdown)
+Vue.use(VueShowdown, {
+    flavor: 'github',
+    options: {
+      emoji: false,
+    },
+  })
 
 Vue.config.productionTip = false
 

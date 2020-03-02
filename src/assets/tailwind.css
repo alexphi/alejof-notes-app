@@ -21,6 +21,11 @@ blockquote > p {
     @apply mb-0;
 }
 
+img {
+    @apply max-w-lg;
+    max-height: 32rem;
+}
+
 @tailwind components;
 
 @tailwind utilities;

@@ -12,7 +12,7 @@
       >{{ entry.source }}</a>
 
       <div class="my-5">
-        <vue-simple-markdown :source="entry.content" />
+        <VueShowdown :markdown="entry.content" />
       </div>
     </div>
     <div
@@ -128,14 +128,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.markdown-body {
-  white-space: pre-wrap;
-}
-
-.markdown-body img {
-  max-width: 80%;
-  max-height: 300px;
-}
-</style>
