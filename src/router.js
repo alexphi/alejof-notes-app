@@ -35,10 +35,16 @@ const routes = [
         component: () => import(/* webpackChunkName: "entry-list"  */ './views/List.vue')
     },
     {
-        path: '/view/:noteId',
-        name: 'view',
+        path: '/view/drafts/:noteId',
+        name: 'viewDraft',
         component: () => import(/* webpackChunkName: "entry-view"  */ './views/View.vue'),
-        props: true,
+        props: route => ({ noteId: route.params.noteId, published: false }),
+    },
+    {
+        path: '/view/published/:noteId',
+        name: 'viewPublished',
+        component: () => import(/* webpackChunkName: "entry-view"  */ './views/View.vue'),
+        props: route => ({ noteId: route.params.noteId, published: true }),
     },
 ]
 
