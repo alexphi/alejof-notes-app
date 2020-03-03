@@ -189,7 +189,7 @@ export default {
 
         let id = this.noteId;
         if (!id && response.data.success) {
-          id = response.data.data.id;
+          id = response.data.noteId;
         }
 
         if (previewAfterSave) {
