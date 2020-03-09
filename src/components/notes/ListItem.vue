@@ -2,7 +2,7 @@
   <li class="border-b border-gray-300">
     <router-link
       :to="viewRoute"
-      class="m-px p-4 flex flex-row justify-between no-underline hover:bg-gray-100"
+      class="flex flex-row justify-between p-4 m-px no-underline hover:bg-gray-100"
     >
       <div class="flex-grow mx-2">
         <p class="mb-0">
@@ -13,7 +13,7 @@
           <span class="text-blue-700" v-if="showSource">{{ sourceDomain }}</span>
         </p>
       </div>
-      <div class="text-gray-500 self-center">
+      <div class="self-center text-gray-500">
         <svg viewBox="0 0 20 20" fill="currentColor" class="w-6">
           <path
             fill-rule="evenodd"
@@ -72,7 +72,7 @@ export default {
       return this.type === Constants.EntryTypes.LINK;
     },
     sourceDomain() {
-      if (!this.showSource) return "";
+      if (!this.showSource || !this.source) return "";
 
       const matches = this.source.match(
         /\b(?:https?:\/\/|www\.)([^ \f\n\r\t\v\]/]+)\b/
