@@ -6,25 +6,21 @@ import Constants from './constants'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    state: {
-        isLoggedIn: false,
-        authData: {},
-        isNotAllowed: false,
-        headerType: Constants.HeaderTypes.NORMAL
+  state: {
+    isLoggedIn: false,
+    authData: {},
+    isNotAllowed: false
+  },
+  mutations: {
+    [Constants.Mutations.SET_AUTH_DATA](state, data) {
+      state.isLoggedIn = data.loggedIn
+      state.authData = data
     },
-    mutations: {
-        [Constants.Mutations.SET_AUTH_DATA](state, data) {
-            state.isLoggedIn = data.loggedIn
-            state.authData = data
-        },
-        [Constants.Mutations.SET_NOT_ALLOWED](state) {
-            state.isNotAllowed = true
-        },
-        [Constants.Mutations.SET_HEADER_TYPE](state, data) {
-            state.headerType = data
-        },
+    [Constants.Mutations.SET_NOT_ALLOWED](state) {
+      state.isNotAllowed = true
     },
-    actions: {
+  },
+  actions: {
 
-    }
+  }
 })

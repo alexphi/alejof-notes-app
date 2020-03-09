@@ -1,6 +1,6 @@
 <template>
-  <div class="h-full flex flex-col justify-start">
-    <div class="flex-grow py-5 px-4 md:mt-5">
+  <div class="flex flex-col justify-start h-full">
+    <div class="flex-grow px-4 py-5 md:mt-5">
       <h1 class="text-2xl">
         <input
           type="text"
@@ -10,7 +10,7 @@
         />
       </h1>
 
-      <p class="text-gray-600 text-sm" v-show="entry.title">
+      <p class="text-sm text-gray-600" v-show="entry.title">
         this will be a [
         <a v-if="!isText" href="#" @click.prevent="setText" class="font-narrow">text</a>
         <strong v-else>text</strong>
@@ -31,8 +31,8 @@
         ></textarea>
       </div>
     </div>
-    <div v-if="isLink" class="py-5 px-4">
-      <p class="text-gray-600 mb-1">Source:</p>
+    <div v-if="isLink" class="px-4 py-5">
+      <p class="mb-1 text-gray-600">Source:</p>
       <input
         type="text"
         class="w-full appearance-none focus:outline-none"
@@ -42,7 +42,7 @@
       />
     </div>
     <div
-      class="py-5 px-4 md:px-8 border-t md:border border-gray-300 md:shadow md:-mx-8 md:mb-4 md:rounded-lg flex flex-row justify-between"
+      class="flex flex-row justify-between px-4 py-5 border-t border-gray-300 md:px-8 md:border md:shadow md:-mx-8 md:mb-4 md:rounded-lg"
     >
       <a href="#" @click.prevent="deleteNote" class="font-narrow">{{ deleteText }}</a>
 
@@ -86,7 +86,7 @@ export default {
       return this.entry.type === Constants.EntryTypes.LINK;
     },
     deleteText() {
-      return this.noteId ? 'delete' : 'discard'
+      return this.noteId ? "delete" : "discard";
     },
 
     slug: {

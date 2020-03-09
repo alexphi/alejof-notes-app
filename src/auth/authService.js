@@ -1,97 +1,97 @@
 // src/auth/authService.js
 
-import auth0 from 'auth0-js';
-import EventEmitter from 'events';
-import authConfig from '../../auth.config.json';
+import auth0 from 'auth0-js'
+import EventEmitter from 'events'
+import authConfig from '../../auth.config.json'
 
 const webAuth = new auth0.WebAuth({
-    domain: authConfig.domain,
-    redirectUri: `${window.location.origin}/callback`,
-    clientID: authConfig.clientId,
-    responseType: 'id_token',
-    scope: 'openid profile email'
-});
+  domain: authConfig.domain,
+  redirectUri: `${window.location.origin}/callback`,
+  clientID: authConfig.clientId,
+  responseType: 'id_token',
+  scope: 'openid profile email'
+})
 
-const localStorageKey = 'loggedIn';
-const loginEvent = 'loginEvent';
+const localStorageKey = 'loggedIn'
+const loginEvent = 'loginEvent'
 
 class AuthService extends EventEmitter {
-    idToken = null;
-    profile = null;
-    tokenExpiry = null;
+  idToken = null;
+  profile = null;
+  tokenExpiry = null;
 
-    // Starts the user login flow
-    login() {
-        webAuth.authorize();
-    }
+  // Starts the user login flow
+  login() {
+    webAuth.authorize()
+  }
 
-    // Handles the callback request from Auth0
-    handleAuthentication() {
-        return new Promise((resolve, reject) => {
-            webAuth.parseHash((err, authResult) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    this.localLogin(authResult);
-                    resolve(authResult.idToken);
-                }
-            });
-        });
-    }
+  // Handles the callback request from Auth0
+  handleAuthentication() {
+    return new Promise((resolve, reject) => {
+      webAuth.parseHash((err, authResult) => {
+        if (err) {
+          reject(err)
+        } else {
+          this.localLogin(authResult)
+          resolve(authResult.idToken)
+        }
+      })
+    })
+  }
 
-    localLogin(authResult) {
-        this.idToken = authResult.idToken;
-        this.profile = authResult.idTokenPayload;
+  localLogin(authResult) {
+    this.idToken = authResult.idToken
+    this.profile = authResult.idTokenPayload
 
-        // Convert the JWT expiry time from seconds to milliseconds
-        this.tokenExpiry = new Date(this.profile.exp * 1000);
+    // Convert the JWT expiry time from seconds to milliseconds
+    this.tokenExpiry = new Date(this.profile.exp * 1000)
 
-        localStorage.setItem(localStorageKey, 'true');
+    localStorage.setItem(localStorageKey, 'true')
 
-        this.emit(loginEvent, {
-            loggedIn: true,
-            token: authResult.idToken,
-            profile: authResult.idTokenPayload,
-            state: authResult.appState || {}
-        });
-    }
+    this.emit(loginEvent, {
+      loggedIn: true,
+      token: authResult.idToken,
+      profile: authResult.idTokenPayload,
+      state: authResult.appState || {}
+    })
+  }
 
-    renewTokens() {
-        return new Promise((resolve, reject) => {
-            if (localStorage.getItem(localStorageKey) !== "true") {
-                return reject("Not logged in");
-            }
+  renewTokens() {
+    return new Promise((resolve, reject) => {
+      if (localStorage.getItem(localStorageKey) !== "true") {
+        return reject("Not logged in")
+      }
 
-            webAuth.checkSession({}, (err, authResult) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    this.localLogin(authResult);
-                    resolve(authResult);
-                }
-            });
-        });
-    }
+      webAuth.checkSession({}, (err, authResult) => {
+        if (err) {
+          reject(err)
+        } else {
+          this.localLogin(authResult)
+          resolve(authResult)
+        }
+      })
+    })
+  }
 
-    logOut() {
-        localStorage.removeItem(localStorageKey);
+  logOut() {
+    localStorage.removeItem(localStorageKey)
 
-        this.idToken = null;
-        this.tokenExpiry = null;
-        this.profile = null;
+    this.idToken = null
+    this.tokenExpiry = null
+    this.profile = null
 
-        webAuth.logout({
-            returnTo: window.location.origin
-        });
+    webAuth.logout({
+      returnTo: window.location.origin
+    })
 
-        this.emit(loginEvent, { loggedIn: false });
-    }
+    this.emit(loginEvent, { loggedIn: false })
+  }
 
-    isAuthenticated() {
-        return (
-            Date.now() < this.tokenExpiry && localStorage.getItem(localStorageKey) === 'true'
-        );
-    }
+  isAuthenticated() {
+    return (
+      Date.now() < this.tokenExpiry && localStorage.getItem(localStorageKey) === 'true'
+    )
+  }
 }
 
-export default new AuthService();
+export default new AuthService()

@@ -1,13 +1,13 @@
 <template>
-  <div class="h-full flex flex-col justify-start">
-    <div class="flex-grow py-5 px-4 md:mt-5">
+  <div class="flex flex-col justify-start h-full">
+    <div class="flex-grow px-4 py-5 md:mt-5">
       <h1 class="text-2xl" v-if="loading">loading note...</h1>
       <h1 class="text-2xl leading-tight" v-else>{{ entry.title }}</h1>
 
       <a
         :href="entry.source"
         target="_blank"
-        class="text-gray-600 text-sm"
+        class="text-sm text-gray-600"
         v-if="isLink"
       >{{ entry.source }}</a>
 
@@ -16,7 +16,7 @@
       </div>
     </div>
     <div
-      class="py-5 px-4 md:px-8 border-t md:border border-gray-300 md:shadow md:-mx-8 md:mb-4 md:rounded-lg flex flex-row justify-between"
+      class="flex flex-row justify-between px-4 py-5 border-t border-gray-300 md:px-8 md:border md:shadow md:-mx-8 md:mb-4 md:rounded-lg"
     >
       <a href="#" @click.prevent="move" class="font-narrow">{{ moveText }}</a>
       <div class="inline-block">
@@ -114,7 +114,7 @@ export default {
         if (this.published) await this.$http.delete(url);
         else await this.$http.post(url);
 
-        this.goBack()
+        this.goBack();
       } catch (error) {
         console.error(error);
       }

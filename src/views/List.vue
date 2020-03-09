@@ -1,8 +1,12 @@
 <template>
-  <div class="h-full flex flex-col justify-start">
-    <div class="flex flex-row justify-between items-end px-4 py-5 md:mt-5">
+  <div class="flex flex-col justify-start h-full">
+    <div class="flex flex-row items-end justify-between px-4 py-5 md:mt-5">
       <router-link to="/" class="flex items-end no-underline">
-        <svg viewBox="0 -1 401.52289 401" class="w-10 md:w-16 ml-3" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          viewBox="0 -1 401.52289 401"
+          class="w-10 ml-3 md:w-16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             d="m370.589844 250.972656c-5.523438 0-10 4.476563-10 10v88.789063c-.019532 16.5625-13.4375 29.984375-30 30h-280.589844c-16.5625-.015625-29.980469-13.4375-30-30v-260.589844c.019531-16.558594 13.4375-29.980469 30-30h88.789062c5.523438 0 10-4.476563 10-10 0-5.519531-4.476562-10-10-10h-88.789062c-27.601562.03125-49.96875 22.398437-50 50v260.59375c.03125 27.601563 22.398438 49.96875 50 50h280.589844c27.601562-.03125 49.96875-22.398437 50-50v-88.792969c0-5.523437-4.476563-10-10-10zm0 0"
           />
@@ -11,19 +15,19 @@
           />
         </svg>
 
-        <h1 class="text-4xl ml-4 hidden md:inline">Notes app</h1>
+        <h1 class="hidden ml-4 text-4xl md:inline">Notes app</h1>
       </router-link>
       <div class="pb-2 text-sm text-gray-600">
         <span class="my-0">Logged in as {{ nickname }}</span>
         <a href="#" class="ml-4 font-narrow" @click.prevent="logout">Logout</a>
       </div>
     </div>
-    <div class="flex-grow md:border md:pt-3 border-gray-300 md:my-5 md:rounded-lg md:shadow">
-      <div class="flex flex-row justify-between border-b pl-3">
+    <div class="flex-grow border-gray-300 md:border md:pt-3 md:my-5 md:rounded-lg md:shadow">
+      <div class="flex flex-row justify-between pl-3 border-b">
         <ul class="flex">
           <li class="mr-2">
             <a
-              class="inline-block py-2 px-4 text-xl no-underline border-blue-700"
+              class="inline-block px-4 py-2 text-xl no-underline border-blue-700"
               :class="published ? '' : 'border-b-4'"
               href="#"
               @click.prevent="viewPublished(false)"
@@ -31,14 +35,17 @@
           </li>
           <li class="mr-2">
             <a
-              class="inline-block py-2 px-4 text-xl no-underline border-blue-700"
+              class="inline-block px-4 py-2 text-xl no-underline border-blue-700"
               :class="published ? 'border-b-4' : ''"
               href="#"
               @click.prevent="viewPublished(true)"
             >Published</a>
           </li>
         </ul>
-        <router-link to="/new" class="hidden md:inline-block py-2 px-4 font-narrow border-gray-600">new entry</router-link>
+        <router-link
+          to="/new"
+          class="hidden px-4 py-2 border-gray-600 md:inline-block font-narrow"
+        >new entry</router-link>
       </div>
 
       <transition>
@@ -52,7 +59,7 @@
       </transition>
     </div>
 
-    <div class="py-5 px-4 text-right border-t border-gray-300 md:hidden">
+    <div class="px-4 py-5 text-right border-t border-gray-300 md:hidden">
       <router-link to="/new" class="font-narrow">new entry</router-link>
     </div>
   </div>

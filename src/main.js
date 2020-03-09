@@ -12,16 +12,16 @@ import './assets/tailwind.css'
 Vue.use(AuthPlugin)
 Vue.use(AxiosPlugin)
 Vue.use(VueShowdown, {
-    flavor: 'github',
-    options: {
-      emoji: false,
-    },
-  })
+  flavor: 'github',
+  options: {
+    emoji: false,
+  },
+})
 
 Vue.config.productionTip = false
 
 new Vue({
-    router,
-    store,
-    render: h => h(App)
+  router,
+  store,
+  render: h => h(App)
 }).$mount('#app')
