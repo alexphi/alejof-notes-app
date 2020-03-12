@@ -140,9 +140,6 @@ export default {
       // Code that will run only after the
       // entire view has been re-rendered
       this.autoExpand();
-
-      const field = this.$refs.contentInput;
-      field.focus();
     });
   },
 
