@@ -152,7 +152,8 @@ export default {
     },
 
     async save(previewAfterSave) {
-      if (!this.entry.type) {
+      // as a minimum, ensure a note has a title
+      if (!this.entry.title) {
         this.$emit(Constants.Events.ENTRY_SAVED);
         return;
       }
