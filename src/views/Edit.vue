@@ -1,6 +1,6 @@
 <template>
   <div class="h-full">
-    <note-editor :noteId="noteId" @saved="exit" @preview="previewNote"></note-editor>
+    <note-editor :noteId="noteId" :published="published" @saved="exit" @preview="previewNote"></note-editor>
   </div>
 </template>
 
@@ -14,6 +14,11 @@ export default {
       type: String,
       default: "",
       required: false
+    },
+    published: {
+      type: Boolean,
+      default: false,
+      required: true
     }
   },
   components: {

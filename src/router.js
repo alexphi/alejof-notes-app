@@ -19,20 +19,26 @@ const routes = [
     component: Callback
   },
   {
+    path: '/list',
+    name: 'list',
+    component: () => import(/* webpackChunkName: "entry-list"  */ './views/List.vue')
+  },
+  {
     path: '/new',
     name: 'new',
     component: () => import(/* webpackChunkName: "entry-new"  */ './views/Edit.vue')
   },
   {
-    path: '/edit/:noteId',
-    name: 'edit',
+    path: '/edit/drats/:noteId',
+    name: 'editDraft',
     component: () => import(/* webpackChunkName: "entry-new"  */ './views/Edit.vue'),
-    props: true,
+    props: route => ({ noteId: route.params.noteId, published: false }),
   },
   {
-    path: '/list',
-    name: 'list',
-    component: () => import(/* webpackChunkName: "entry-list"  */ './views/List.vue')
+    path: '/edit/published/:noteId',
+    name: 'editPublished',
+    component: () => import(/* webpackChunkName: "entry-new"  */ './views/Edit.vue'),
+    props: route => ({ noteId: route.params.noteId, published: true }),
   },
   {
     path: '/view/drafts/:noteId',

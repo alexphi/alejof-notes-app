@@ -47,8 +47,8 @@
       <a href="#" @click.prevent="deleteNote" class="font-narrow">{{ deleteText }}</a>
 
       <div class="inline-block">
-        <a href="#" v-if="entry.type" @click.prevent="save(true)" class="ml-4 font-narrow">preview</a>
-        <a href="#" @click.prevent="save(false)" class="ml-4 font-narrow">go back</a>
+        <a href="#" v-if="canPreview" @click.prevent="save(true)" class="ml-4 font-narrow">preview</a>
+        <a href="#" @click.prevent="save(false)" class="ml-4 font-narrow">{{ saveText }}</a>
       </div>
     </div>
   </div>
@@ -64,6 +64,11 @@ export default {
       type: String,
       default: "",
       required: false
+    },
+    published: {
+      type: Boolean,
+      default: false,
+      required: true
     }
   },
   data() {
@@ -85,8 +90,14 @@ export default {
     isLink() {
       return this.entry.type === Constants.EntryTypes.LINK;
     },
+    canPreview() {
+      return this.entry.type && !this.published;
+    },
+    saveText() {
+      return this.published ? "save" : "go back";
+    },
     deleteText() {
-      return this.noteId ? "delete" : "discard";
+      return (this.published || !this.noteId) ? "discard" : "delete";
     },
 
     slug: {
@@ -106,7 +117,7 @@ export default {
 
   async mounted() {
     if (this.noteId) {
-      const url = `notes/${this.noteId}`;
+      const url = `notes/${this.noteId}?published=${this.published}`;
 
       try {
         const response = await this.$http.get(url);
@@ -164,7 +175,7 @@ export default {
       let method = "post";
 
       if (this.noteId) {
-        url = `notes/${this.noteId}`;
+        url = `notes/${this.noteId}?published=${this.published}`;
         method = "put";
       }
 
@@ -201,7 +212,7 @@ export default {
     },
 
     async deleteNote() {
-      if (!this.noteId) {
+      if (this.published || !this.noteId) {
         this.$emit(Constants.Events.ENTRY_SAVED);
         return;
       }

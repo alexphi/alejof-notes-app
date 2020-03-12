@@ -30,7 +30,8 @@ export default {
       this.$router.push("/list");
     },
     editNote(noteId) {
-      this.$router.push(`/edit/${noteId}`);
+      const segment = this.published ? 'published' : 'drafts'
+      this.$router.push(`/edit/${segment}/${noteId}`);
     }
   }
 };
