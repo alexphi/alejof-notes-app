@@ -29,7 +29,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "entry-new"  */ './views/Edit.vue')
   },
   {
-    path: '/edit/drats/:noteId',
+    path: '/edit/drafts/:noteId',
     name: 'editDraft',
     component: () => import(/* webpackChunkName: "entry-new"  */ './views/Edit.vue'),
     props: route => ({ noteId: route.params.noteId, published: false }),
