@@ -30,8 +30,10 @@ export default {
       this.$router.push("/list");
     },
     editNote(noteId) {
-      const segment = this.published ? 'published' : 'drafts'
-      this.$router.push(`/edit/${segment}/${noteId}`);
+      // prevent edit for published notes
+      if (this.published) return;
+
+      this.$router.push(`/edit/drafts/${noteId}`);
     }
   }
 };

@@ -35,12 +35,6 @@ const routes = [
     props: route => ({ noteId: route.params.noteId, published: false }),
   },
   {
-    path: '/edit/published/:noteId',
-    name: 'editPublished',
-    component: () => import(/* webpackChunkName: "entry-new"  */ './views/Edit.vue'),
-    props: route => ({ noteId: route.params.noteId, published: true }),
-  },
-  {
     path: '/view/drafts/:noteId',
     name: 'viewDraft',
     component: () => import(/* webpackChunkName: "entry-view"  */ './views/View.vue'),

@@ -20,7 +20,7 @@
     >
       <a href="#" @click.prevent="move" class="font-narrow">{{ moveText }}</a>
       <div class="inline-block">
-        <a href="#" @click.prevent="edit" class="ml-4 font-narrow">edit</a>
+        <a href="#" v-if="!published" @click.prevent="edit" class="ml-4 font-narrow">edit</a>
         <a href="#" @click.prevent="goBack" class="ml-4 font-narrow">go back</a>
       </div>
     </div>
